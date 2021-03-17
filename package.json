@@ -16,6 +16,7 @@
     "@react-ssr/core": "^0.24.0",
     "@react-ssr/express": "^0.24.0",
     "bootstrap": "^4.6.0",
+    "connect-session-sequelize": "^7.1.1",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "pg": "^8.5.1",
