@@ -2,11 +2,25 @@
     "development": {
         "server": {
             "port": 3000
+        },
+        "database": {
+            "host": "localhost",
+            "port": 5432,
+            "database": "etsit_incoming",
+            "username": "etsit_incoming_server",
+            "password": "passw0rd"
         }
     },
     "production": {
         "server": {
             "port": 3000
+        },
+        "database": {
+            "host": "localhost",
+            "port": 5432,
+            "database": "etsit_incoming",
+            "username": "etsit_incoming_server",
+            "password": "passw0rd"
         }
     }
 }
