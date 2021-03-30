@@ -1,0 +1,13 @@
+header {
+	background-color: #4664A2;
+	font-size: 1.5em;
+}
+header span {
+	color: white;
+}
+header span.title {
+	font-size: 1.1em;
+}
+header span.subtitle {
+	font-size: 0.85em;
+}
