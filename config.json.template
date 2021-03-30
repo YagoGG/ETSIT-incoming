@@ -10,7 +10,8 @@
             "port": 5432,
             "database": "etsit_incoming",
             "username": "etsit_incoming_server",
-            "password": "passw0rd"
+            "password": "passw0rd",
+            "dialect": "postgres"
         }
     },
     "production": {
@@ -24,7 +25,8 @@
             "port": 5432,
             "database": "etsit_incoming",
             "username": "etsit_incoming_server",
-            "password": "passw0rd"
+            "password": "passw0rd",
+            "dialect": "postgres"
         }
     }
 }
