@@ -3,7 +3,6 @@
 	"rules": {
 		"indent": ["error", "tab"],
 		"max-classes-per-file": "off",
-		"no-console": "off",
 		"no-plusplus": ["error",
 			{
 				"allowForLoopAfterthoughts": true

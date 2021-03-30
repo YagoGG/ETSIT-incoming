@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const express = require('express');
 const register = require('@react-ssr/express/register');
 const session = require('express-session');
