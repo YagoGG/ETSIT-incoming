@@ -29,6 +29,9 @@ app.use(session(sessionOptions));
 
 app.use(router);
 
+// Serve static files in 'static/'.
+app.use('/static', express.static(`${__dirname}/static`));
+
 (async () => {
 	// This adds to Express the template engine we use for server-side rendering
 	// React views.
