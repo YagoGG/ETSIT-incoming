@@ -35,6 +35,7 @@
   "scripts": {
     "dev": "nodemon",
     "lint": "eslint --ext .js,.jsx .",
-    "test": "yarn lint"
+    "test": "yarn lint",
+    "sequelize": "sequelize --config=sequelize_cli.config.js --migrations-path=src/migrations"
   }
 }
