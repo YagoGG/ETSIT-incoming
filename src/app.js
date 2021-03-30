@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 const express = require('express');
 const register = require('@react-ssr/express/register');
+const passport = require('passport');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
@@ -26,6 +27,9 @@ if (env === 'production') {
 	sessionOptions.cookie.secure = true;
 }
 app.use(session(sessionOptions));
+app.use(express.urlencoded({ extended: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(router);
 

@@ -8,3 +8,5 @@ module.exports.sequelize = new Sequelize({
 	dialect: 'postgres',
 	...config.database,
 });
+
+module.exports.User = require('./user');
