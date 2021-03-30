@@ -4,8 +4,8 @@ const register = require('@react-ssr/express/register');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-const { sequelize } = require('./db');
 const router = require('./routes');
+const { sequelize } = require('./models');
 
 const env = process.env.NODE_ENV || 'development';
 const config = require('../config.json')[env];
