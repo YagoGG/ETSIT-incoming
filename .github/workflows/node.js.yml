@@ -67,5 +67,8 @@ jobs:
     - name: Create testing database
       run: NODE_ENV=test yarn sequelize db:create
 
+    - name: Run lint checks
+      run: yarn lint
+
     - name: Run tests
       run: yarn test
