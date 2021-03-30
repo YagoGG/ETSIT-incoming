@@ -1,3 +1,19 @@
+.btn-outline-primary {
+	background-color: transparent;
+	color: #4664A2;
+	border-color: #4664A2;
+	border-width: 2px;
+}
+.btn-outline-primary:hover {
+	background-color: #4664A2;
+	border-color: #4664A2;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active {
+	background-color: #4664A2;
+	border-color: #4664A2;
+}
+
 header {
 	background-color: #4664A2;
 	font-size: 1.5em;

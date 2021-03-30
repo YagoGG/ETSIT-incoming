@@ -3,6 +3,7 @@ const passport = require('passport');
 const LocalStragy = require('passport-local').Strategy;
 
 const { User } = require('../models');
+const { ErrorMessage } = require('../utils/message');
 
 passport.use(new LocalStragy({
 	usernameField: 'email',
@@ -27,3 +28,34 @@ passport.deserializeUser(async (id, done) => {
 	const user = await User.findByPk(id);
 	done(null, user);
 });
+
+function authenticate(req, res, next) {
+	return new Promise((resolve, reject) => {
+		passport.authenticate('local', (err, user, info) => {
+			if (err) reject(err);
+			if (!user) reject(info.message);
+			resolve(user);
+		})(req, res, next);
+	});
+}
+
+module.exports.login = async (req, res, next) => {
+	try {
+		const user = await authenticate(req, res, next);
+		return req.login(user, (err) => {
+			if (err) throw err;
+			res.render('index', { user });
+		});
+	} catch (err) {
+		return res.render('login', {
+			messages: [
+				new ErrorMessage(err),
+			],
+		});
+	}
+};
+
+module.exports.logout = (req, res) => {
+	req.logout();
+	res.redirect('/');
+};
