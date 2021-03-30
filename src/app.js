@@ -1,6 +1,4 @@
-/* eslint-disable no-console */
 const express = require('express');
-const register = require('@react-ssr/express/register');
 const passport = require('passport');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -36,14 +34,4 @@ app.use(router);
 // Serve static files in 'static/'.
 app.use('/static', express.static(`${__dirname}/static`));
 
-(async () => {
-	// This adds to Express the template engine we use for server-side rendering
-	// React views.
-	await register(app);
-
-	app.listen(config.server.port, () => {
-		console.log('ETSIT-incoming');
-		console.log('==============');
-		console.log(`App listening at port ${config.server.port}...`);
-	});
-})();
+module.exports = app;
