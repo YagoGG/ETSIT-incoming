@@ -1,4 +1,3 @@
-const bcrypt = require('bcrypt');
 const passport = require('passport');
 const LocalStragy = require('passport-local').Strategy;
 
@@ -13,7 +12,7 @@ passport.use(new LocalStragy({
 
 	if (!user) return done(null, false, { message: 'Incorrect email' });
 
-	const isPasswordCorrect = await bcrypt.compare(password, user.passwordHash);
+	const isPasswordCorrect = await user.verifyPassword(password);
 
 	if (!isPasswordCorrect) return done(null, false, { message: 'Incorrect password' });
 

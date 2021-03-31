@@ -2,14 +2,10 @@
  * @jest-environment node
  */
 const request = require('supertest');
-const bcrypt = require('bcrypt');
 const app = require('../../app');
 const { sequelize, User } = require('../../models');
 const { ErrorMessage } = require('../../utils/message');
 const { interceptJSXRenderProps } = require('../utils');
-
-const env = process.env.NODE_ENV || 'development';
-const config = require('../../../config.json')[env];
 
 describe('auth controller', () => {
 	interceptJSXRenderProps(app);
@@ -17,11 +13,10 @@ describe('auth controller', () => {
 	const USER = {
 		email: 'user1@domain.com',
 		name: 'John Doe',
+		password: 's3cr3t',
 	};
-	const USER_PASSWORD = 's3cr3t';
 
 	beforeAll(async () => {
-		USER.passwordHash = await bcrypt.hash(USER_PASSWORD, config.server.passwordSaltRounds);
 		await sequelize.sync({ force: true });
 		await User.create(USER);
 	});
@@ -113,7 +108,7 @@ describe('auth controller', () => {
 		await agent
 			.post('/login')
 			.send(`email=${USER.email}`)
-			.send(`password=${USER_PASSWORD}`)
+			.send(`password=${USER.password}`)
 			.expect(200)
 			.expect((res) => {
 				expect(res.body.view).toEqual('index');

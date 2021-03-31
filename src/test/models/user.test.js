@@ -9,13 +9,13 @@ describe('User model - creation', () => {
 	it('should succeed when correct data is passed', async () => {
 		await expect(User.create({
 			email: 'foo@example.com',
-			passwordHash: '12341234123',
+			password: 'p@ssw0rd',
 		})).resolves.toBeInstanceOf(User);
 	});
 
 	it('should throw a SequelizeValidationError when no email is passed', async () => {
 		await expect(User.create({
-			passwordHash: '12341234123',
+			password: 'p@ssw0rd',
 		})).rejects.toThrow(SequelizeValidationError);
 	});
 
@@ -25,7 +25,7 @@ describe('User model - creation', () => {
 		})).rejects.toThrow(SequelizeValidationError);
 	});
 
-	it('should throw a SequelizeValidationError when no password hash is passed', async () => {
+	it('should throw a SequelizeValidationError when no password is passed', async () => {
 		await expect(User.create({
 			email: 'foo@example.com',
 		})).rejects.toThrow(SequelizeValidationError);
