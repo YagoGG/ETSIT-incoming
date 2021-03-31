@@ -2,6 +2,13 @@
 	"extends": ["airbnb", "plugin:jest/recommended"],
 	"rules": {
 		"indent": ["error", "tab"],
+		"jest/expect-expect": ["error",
+			{
+				"assertFunctionNames": [
+					"expect", "request.*.expect", "agent.*.expect"
+				]
+			}
+		],
 		"max-classes-per-file": "off",
 		"no-plusplus": ["error",
 			{
