@@ -13,6 +13,15 @@ describe('User model - creation', () => {
 		})).resolves.toBeInstanceOf(User);
 	});
 
+	it('should throw a SequelizeValidationError if the email is not unique', async () => {
+		const userData = {
+			email: 'someuser@example.com',
+			password: 'p@ssw0rd',
+		};
+		await expect(User.create(userData)).resolves.toBeInstanceOf(User);
+		await expect(User.create(userData)).rejects.toThrow(SequelizeValidationError);
+	});
+
 	it('should throw a SequelizeValidationError when no email is passed', async () => {
 		await expect(User.create({
 			password: 'p@ssw0rd',
