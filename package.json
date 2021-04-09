@@ -4,9 +4,13 @@
   "main": "src/server.js",
   "author": "Yago González",
   "devDependencies": {
+    "@babel/core": "^7.13.14",
+    "@babel/node": "^7.13.13",
     "@babel/plugin-transform-runtime": "^7.13.10",
     "@babel/preset-env": "^7.13.12",
     "@babel/preset-react": "^7.13.13",
+    "@babel/preset-typescript": "^7.13.0",
+    "@babel/register": "^7.13.14",
     "babel-jest": "^26.6.3",
     "eslint": "^7.21.0",
     "eslint-config-airbnb": "^18.2.1",
