@@ -1,10 +1,10 @@
-const passport = require('passport');
-const LocalStragy = require('passport-local').Strategy;
+import passport from 'passport';
+import passportLocal from 'passport-local';
 
-const { User } = require('../models');
-const { ErrorMessage } = require('../utils/message');
+import { User } from '../models';
+import { ErrorMessage } from '../utils/message';
 
-passport.use(new LocalStragy({
+passport.use(new passportLocal.Strategy({
 	usernameField: 'email',
 	passwordField: 'password',
 }, async (email, password, done) => {
@@ -38,7 +38,7 @@ function authenticate(req, res, next) {
 	});
 }
 
-module.exports.login = async (req, res, next) => {
+export async function login(req, res, next) {
 	try {
 		const user = await authenticate(req, res, next);
 		return req.login(user, (err) => {
@@ -52,9 +52,9 @@ module.exports.login = async (req, res, next) => {
 			],
 		});
 	}
-};
+}
 
-module.exports.logout = (req, res) => {
+export async function logout(req, res) {
 	req.logout();
 	res.redirect('/');
-};
+}

@@ -1,5 +1,8 @@
-const { SequelizeValidationError } = require('sequelize');
-const { sequelize, User } = require('../../models');
+import Sequelize from 'sequelize';
+import { User } from '../../models';
+import sequelize from '../../models/db';
+
+const { SequelizeValidationError } = Sequelize;
 
 describe('User model - creation', () => {
 	beforeAll(async () => {

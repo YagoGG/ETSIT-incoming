@@ -1,13 +1,17 @@
-const express = require('express');
-const passport = require('passport');
-const session = require('express-session');
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
+import express from 'express';
+import passport from 'passport';
+import session from 'express-session';
+import sessionSequelize from 'connect-session-sequelize';
 
-const router = require('./routes');
-const { sequelize } = require('./models');
+import router from './routes';
+import sequelize from './models/db';
+
+import configFile from '../config.json';
+
+const SequelizeStore = sessionSequelize(session.Store);
 
 const env = process.env.NODE_ENV || 'development';
-const config = require('../config.json')[env];
+const config = configFile[env];
 
 const app = express();
 
@@ -34,4 +38,4 @@ app.use(router);
 // Serve static files in 'static/'.
 app.use('/static', express.static(`${__dirname}/static`));
 
-module.exports = app;
+export default app;

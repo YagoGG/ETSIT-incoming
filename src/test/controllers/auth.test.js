@@ -1,11 +1,12 @@
 /**
  * @jest-environment node
  */
-const request = require('supertest');
-const app = require('../../app');
-const { sequelize, User } = require('../../models');
-const { ErrorMessage } = require('../../utils/message');
-const { interceptJSXRenderProps } = require('../utils');
+import request from 'supertest';
+import app from '../../app';
+import { User } from '../../models';
+import sequelize from '../../models/db';
+import { ErrorMessage } from '../../utils/message';
+import { interceptJSXRenderProps } from '../utils';
 
 describe('auth controller', () => {
 	interceptJSXRenderProps(app);

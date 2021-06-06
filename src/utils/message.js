@@ -1,36 +1,35 @@
-class Message {
+export class Message {
 	constructor(type, message) {
 		this.type = type;
 		this.message = message;
 	}
 }
 
-module.exports.Message = Message;
-module.exports.ERROR = 'error';
-module.exports.INFO = 'info';
-module.exports.WARNING = 'warning';
-module.exports.SUCCESS = 'success';
+export const ERROR = 'error';
+export const INFO = 'info';
+export const WARNING = 'warning';
+export const SUCCESS = 'success';
 
-module.exports.ErrorMessage = class extends Message {
+export class ErrorMessage extends Message {
 	constructor(message) {
-		super(module.exports.ERROR, message);
+		super(ERROR, message);
 	}
-};
+}
 
-module.exports.InfoMessage = class extends Message {
+export class InfoMessage extends Message {
 	constructor(message) {
-		super(module.exports.INFO, message);
+		super(INFO, message);
 	}
-};
+}
 
-module.exports.WarningMessage = class extends Message {
+export class WarningMessage extends Message {
 	constructor(message) {
-		super(module.exports.WARNING, message);
+		super(WARNING, message);
 	}
-};
+}
 
-module.exports.SuccessMessage = class extends Message {
+export class SuccessMessage extends Message {
 	constructor(message) {
-		super(module.exports.SUCCESS, message);
+		super(SUCCESS, message);
 	}
-};
+}

@@ -1,11 +1,23 @@
-const { Model, DataTypes } = require('sequelize');
-const bcrypt = require('bcrypt');
-const { sequelize } = require('.');
+import Sequelize from 'sequelize';
+import bcrypt from 'bcrypt';
+import sequelize from './db';
+
+import configFile from '../../config.json';
+
+const { Model, DataTypes } = Sequelize;
 
 const env = process.env.NODE_ENV || 'development';
-const config = require('../../config.json')[env];
+const config = configFile[env];
 
 class User extends Model {
+	static get STUDENT_ROLE() {
+		return 'student';
+	}
+
+	static get ADMIN_ROLE() {
+		return 'admin';
+	}
+
 	static hashPassword(password) {
 		return bcrypt.hash(password, config.server.passwordSaltRounds);
 	}
@@ -32,6 +44,12 @@ User.init({
 	name: {
 		type: DataTypes.STRING,
 	},
+	role: {
+		type: DataTypes.ENUM,
+		values: [User.STUDENT_ROLE, User.ADMIN_ROLE],
+		defaultValue: User.STUDENT_ROLE,
+		allowNull: false,
+	},
 }, { sequelize });
 
 const hashPasswordHook = async (user) => {
@@ -42,4 +60,4 @@ const hashPasswordHook = async (user) => {
 User.beforeCreate(hashPasswordHook);
 User.beforeUpdate(hashPasswordHook);
 
-module.exports = User;
+export default User;

@@ -1,9 +1,10 @@
 /* eslint-disable no-console */
-const register = require('@react-ssr/express/register');
-const app = require('./app');
+import register from '@react-ssr/express/register';
+import app from './app';
+import configFile from '../config.json';
 
 const env = process.env.NODE_ENV || 'development';
-const config = require('../config.json')[env];
+const config = configFile[env];
 
 (async () => {
 	// This adds to Express the template engine we use for server-side rendering

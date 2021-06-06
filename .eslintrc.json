@@ -5,7 +5,7 @@
 		"jest/expect-expect": ["error",
 			{
 				"assertFunctionNames": [
-					"expect", "request.*.expect", "agent.*.expect"
+					"expect", "request.*.expect", "agent.**.expect"
 				]
 			}
 		],
