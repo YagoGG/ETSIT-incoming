@@ -12,7 +12,7 @@ function requireLogin(req, res, next) {
 }
 
 router.route('/')
-	.get(requireLogin, (req, res) => res.render('index'));
+	.get(requireLogin, (req, res) => res.render('index', { user: req.user }));
 
 router.route('/login')
 	.get((req, res) => res.render('login'))
