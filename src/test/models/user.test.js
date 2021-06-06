@@ -10,10 +10,12 @@ describe('User model - creation', () => {
 	});
 
 	it('should succeed when correct data is passed', async () => {
-		await expect(User.create({
+		const user = await User.create({
 			email: 'foo@example.com',
 			password: 'p@ssw0rd',
-		})).resolves.toBeInstanceOf(User);
+		});
+		await expect(user).toBeInstanceOf(User);
+		await expect(user).toHaveProperty('role', User.STUDENT_ROLE);
 	});
 
 	it('should throw a SequelizeValidationError if the email is not unique', async () => {
