@@ -9,7 +9,7 @@ const { Model, DataTypes } = Sequelize;
 const env = process.env.NODE_ENV || 'development';
 const config = configFile[env];
 
-class User extends Model {
+export default class User extends Model {
 	static get STUDENT_ROLE() {
 		return 'student';
 	}
@@ -59,5 +59,3 @@ const hashPasswordHook = async (user) => {
 };
 User.beforeCreate(hashPasswordHook);
 User.beforeUpdate(hashPasswordHook);
-
-export default User;
