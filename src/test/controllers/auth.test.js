@@ -110,11 +110,8 @@ describe('auth controller', () => {
 			.post('/login')
 			.send(`email=${USER.email}`)
 			.send(`password=${USER.password}`)
-			.expect(200)
-			.expect((res) => {
-				expect(res.body.view).toEqual('index');
-				expect(res.body.props).not.toHaveProperty('messages');
-			});
+			.expect(302)
+			.expect('Location', '/');
 	});
 
 	afterAll(async () => {

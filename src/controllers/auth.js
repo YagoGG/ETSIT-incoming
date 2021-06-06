@@ -43,7 +43,7 @@ export async function login(req, res, next) {
 		const user = await authenticate(req, res, next);
 		return req.login(user, (err) => {
 			if (err) throw err;
-			res.render('index', { user });
+			res.redirect('/');
 		});
 	} catch (err) {
 		return res.render('login', {
