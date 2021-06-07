@@ -1,6 +1,14 @@
 {
-	"extends": ["airbnb", "plugin:jest/recommended"],
+	"extends": [
+		"airbnb", "plugin:import/recommended", "plugin:jest/recommended"
+	],
 	"rules": {
+		"import/order": ["error",
+			{
+				"newlines-between": "always",
+				"alphabetize": { "order": "asc" }
+			}
+		],
 		"indent": ["error", "tab"],
 		"jest/expect-expect": ["error",
 			{
