@@ -1,12 +1,12 @@
-import express from 'express';
-import passport from 'passport';
-import session from 'express-session';
 import sessionSequelize from 'connect-session-sequelize';
-
-import router from './routes';
-import sequelize from './models/db';
+import express from 'express';
+import session from 'express-session';
+import passport from 'passport';
 
 import configFile from '../config.json';
+
+import sequelize from './models/db';
+import router from './routes';
 
 const SequelizeStore = sessionSequelize(session.Store);
 

@@ -2,6 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../static/css/styles.css';
 import { Alert, Container, Navbar } from 'react-bootstrap';
+
 import {
 	ERROR, INFO, WARNING, SUCCESS,
 } from '../utils/message';

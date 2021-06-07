@@ -1,8 +1,9 @@
-import Sequelize from 'sequelize';
 import bcrypt from 'bcrypt';
-import sequelize from './db';
+import Sequelize from 'sequelize';
 
 import configFile from '../../config.json';
+
+import sequelize from './db';
 
 const { Model, DataTypes } = Sequelize;
 

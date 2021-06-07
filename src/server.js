@@ -1,7 +1,9 @@
 /* eslint-disable no-console */
 import register from '@react-ssr/express/register';
-import app from './app';
+
 import configFile from '../config.json';
+
+import app from './app';
 
 const env = process.env.NODE_ENV || 'development';
 const config = configFile[env];

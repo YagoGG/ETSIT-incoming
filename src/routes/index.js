@@ -1,5 +1,7 @@
 import express from 'express';
+
 import * as authController from '../controllers/auth';
+
 import { requireLoggedIn } from './validators';
 
 const router = express.Router();

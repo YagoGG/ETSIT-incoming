@@ -1,5 +1,6 @@
-import { Button, Col, Row } from 'react-bootstrap';
 import React from 'react';
+import { Button, Col, Row } from 'react-bootstrap';
+
 import { User } from '../models';
 
 export default function Index(props) {
