@@ -1,6 +1,6 @@
 import { User } from '../models';
 
-export function requireLoggedIn(req, res, next) {
+export function isLoggedIn(req, res, next) {
 	if (req.user) {
 		next();
 	} else {
@@ -8,8 +8,8 @@ export function requireLoggedIn(req, res, next) {
 	}
 }
 
-export const requireAdmin = [
-	requireLoggedIn,
+export const isAdmin = [
+	isLoggedIn,
 	(req, res, next) => {
 		if (req.user.role === User.ADMIN_ROLE) {
 			next();
