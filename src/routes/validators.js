@@ -1,4 +1,5 @@
-// eslint-disable-next-line import/prefer-default-export
+import { User } from '../models';
+
 export function requireLoggedIn(req, res, next) {
 	if (req.user) {
 		next();
@@ -6,3 +7,14 @@ export function requireLoggedIn(req, res, next) {
 		res.redirect('/login');
 	}
 }
+
+export const requireAdmin = [
+	requireLoggedIn,
+	(req, res, next) => {
+		if (req.user.role === User.ADMIN_ROLE) {
+			next();
+		} else {
+			throw Error('not an admin');
+		}
+	},
+];
