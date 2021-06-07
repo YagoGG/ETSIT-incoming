@@ -1,0 +1,23 @@
+$theme-colors: (
+	"primary": #4664A2
+);
+
+@import '~bootstrap/scss/bootstrap.scss';
+
+.btn-outline-primary {
+	border-width: 2px;
+}
+
+header {
+	background-color: map-get($theme-colors, "primary");
+	font-size: 1.5em;
+}
+header span {
+	color: white;
+}
+header span.title {
+	font-size: 1.1em;
+}
+header span.subtitle {
+	font-size: 0.85em;
+}

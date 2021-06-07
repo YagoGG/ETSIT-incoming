@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../static/css/styles.css';
+import '../static/css/styles.scss';
 import { Alert, Container, Navbar } from 'react-bootstrap';
 
 import {
