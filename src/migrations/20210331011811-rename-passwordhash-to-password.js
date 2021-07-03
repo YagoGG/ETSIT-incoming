@@ -1,4 +1,4 @@
-module.exports = {
+export default {
 	up: async (queryInterface) => {
 		await queryInterface.renameColumn('Users', 'passwordHash', 'password');
 	},
