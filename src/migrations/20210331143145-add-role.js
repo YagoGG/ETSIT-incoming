@@ -1,6 +1,6 @@
-const { User } = require('../models');
+import { User } from '../models';
 
-module.exports = {
+export default {
 	up: async (queryInterface, Sequelize) => {
 		await queryInterface.addColumn('Users', 'role', {
 			type: Sequelize.ENUM,

@@ -1,4 +1,4 @@
-const path = require('path');
+import path from 'path';
 
 /**
  * Jest cannot test both server and JSX code, so it is not possible to make a
@@ -17,7 +17,8 @@ const path = require('path');
  * (just as you would put it in res.render(...)); and where "props" is an
  * object with all the props passed to the view.
  */
-module.exports.interceptJSXRenderProps = (app) => {
+// eslint-disable-next-line import/prefer-default-export
+export function interceptJSXRenderProps(app) {
 	const viewsPath = path.join(__dirname, '../views/');
 	app.engine('jsx', (filePath, options, callback) => {
 		const {
@@ -31,4 +32,4 @@ module.exports.interceptJSXRenderProps = (app) => {
 
 	app.set('views', viewsPath);
 	app.set('view engine', 'jsx');
-};
+}
