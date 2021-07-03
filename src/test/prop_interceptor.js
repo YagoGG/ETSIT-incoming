@@ -17,8 +17,7 @@ import path from 'path';
  * (just as you would put it in res.render(...)); and where "props" is an
  * object with all the props passed to the view.
  */
-// eslint-disable-next-line import/prefer-default-export
-export function interceptJSXRenderProps(app) {
+export default function interceptJSXRenderProps(app) {
 	const viewsPath = path.join(__dirname, '../views/');
 	app.engine('jsx', (filePath, options, callback) => {
 		const {
