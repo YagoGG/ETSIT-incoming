@@ -7,7 +7,7 @@ import app from '../../app';
 import { User } from '../../models';
 import sequelize from '../../models/db';
 import { ErrorMessage } from '../../utils/message';
-import { interceptJSXRenderProps } from '../utils';
+import interceptJSXRenderProps from '../prop_interceptor';
 
 describe('auth controller', () => {
 	interceptJSXRenderProps(app);
