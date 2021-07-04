@@ -6,12 +6,11 @@ import request from 'supertest';
 import app from '../../app';
 import { User } from '../../models';
 import sequelize from '../../models/db';
-import { ErrorMessage } from '../../utils/message';
 import interceptJSXRenderProps from '../prop_interceptor';
 
 describe('auth controller', () => {
 	interceptJSXRenderProps(app);
-	const agent = request.agent(app);
+	const agent = request.agent(app).set('Referer', '/login');
 	const USER = {
 		email: 'user1@domain.com',
 		name: 'John Doe',
@@ -33,48 +32,52 @@ describe('auth controller', () => {
 	it('should reject missing credentials with matching message', async () => {
 		await agent
 			.post('/login')
+			.redirects()
 			.expect(200)
 			.expect((res) => {
 				const { messages } = res.body.props;
 				expect(res.body.view).toEqual('login');
-				expect(messages).toHaveLength(1);
-				expect(messages[0]).toEqual(new ErrorMessage('Missing credentials'));
+				expect(messages.error).toHaveLength(1);
+				expect(messages.error[0]).toEqual('Missing credentials');
 			});
 
 		await agent
 			.post('/login')
 			.send('email=')
 			.send('password=')
+			.redirects()
 			.expect(200)
 			.expect((res) => {
 				const { messages } = res.body.props;
 				expect(res.body.view).toEqual('login');
-				expect(messages).toHaveLength(1);
-				expect(messages[0]).toEqual(new ErrorMessage('Missing credentials'));
+				expect(messages.error).toHaveLength(1);
+				expect(messages.error[0]).toEqual('Missing credentials');
 			});
 
 		await agent
 			.post('/login')
 			.send('email=')
 			.send('password=bar')
+			.redirects()
 			.expect(200)
 			.expect((res) => {
 				const { messages } = res.body.props;
 				expect(res.body.view).toEqual('login');
-				expect(messages).toHaveLength(1);
-				expect(messages[0]).toEqual(new ErrorMessage('Missing credentials'));
+				expect(messages.error).toHaveLength(1);
+				expect(messages.error[0]).toEqual('Missing credentials');
 			});
 
 		await agent
 			.post('/login')
 			.send('email=foo@example.com')
 			.send('password=')
+			.redirects()
 			.expect(200)
 			.expect((res) => {
 				const { messages } = res.body.props;
 				expect(res.body.view).toEqual('login');
-				expect(messages).toHaveLength(1);
-				expect(messages[0]).toEqual(new ErrorMessage('Missing credentials'));
+				expect(messages.error).toHaveLength(1);
+				expect(messages.error[0]).toEqual('Missing credentials');
 			});
 	});
 
@@ -83,12 +86,13 @@ describe('auth controller', () => {
 			.post('/login')
 			.send('email=foo@example.com')
 			.send('password=bar')
+			.redirects()
 			.expect(200)
 			.expect((res) => {
 				const { messages } = res.body.props;
 				expect(res.body.view).toEqual('login');
-				expect(messages).toHaveLength(1);
-				expect(messages[0]).toEqual(new ErrorMessage('Incorrect email'));
+				expect(messages.error).toHaveLength(1);
+				expect(messages.error[0]).toEqual('Incorrect email');
 			});
 	});
 
@@ -97,12 +101,13 @@ describe('auth controller', () => {
 			.post('/login')
 			.send(`email=${USER.email}`)
 			.send('password=bar')
+			.redirects()
 			.expect(200)
 			.expect((res) => {
 				const { messages } = res.body.props;
 				expect(res.body.view).toEqual('login');
-				expect(messages).toHaveLength(1);
-				expect(messages[0]).toEqual(new ErrorMessage('Incorrect password'));
+				expect(messages.error).toHaveLength(1);
+				expect(messages.error[0]).toEqual('Incorrect password');
 			});
 	});
 
