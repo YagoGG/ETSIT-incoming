@@ -46,7 +46,7 @@
     "sequelize-cli": "^6.2.0"
   },
   "scripts": {
-    "dev": "nodemon --ignore 'src/views/*' --exec babel-node src/server.js",
+    "dev": "nodemon --ignore 'src/views/*' --ignore 'src/test/*' --exec babel-node src/server.js",
     "lint": "eslint --ext .js,.jsx .",
     "test": "NODE_ENV=test jest --config=.jestrc.json --run-in-band",
     "test-with-coverage": "yarn test --collect-coverage",
