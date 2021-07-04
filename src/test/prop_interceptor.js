@@ -25,7 +25,7 @@ export default function interceptJSXRenderProps(app) {
 		} = options;
 		callback(null, {
 			view: filePath.replace(viewsPath, '').replace(/\.jsx$/, ''),
-			props,
+			props: { ...props, ..._locals },
 		});
 	});
 

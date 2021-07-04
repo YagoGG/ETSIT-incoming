@@ -1,5 +1,7 @@
 import sessionSequelize from 'connect-session-sequelize';
 import express from 'express';
+import 'express-async-errors';
+import flash from 'express-flash';
 import session from 'express-session';
 import passport from 'passport';
 
@@ -33,9 +35,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(flash());
+
 app.use(router);
 
 // Serve static files in 'static/'.
 app.use('/static', express.static(`${__dirname}/static`));
+
+// Global error handler.
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
+	req.flash('error', err.message);
+	res.redirect('back');
+});
 
 export default app;

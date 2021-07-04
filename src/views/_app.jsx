@@ -3,25 +3,24 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../static/css/styles.scss';
 import { Alert, Container, Navbar } from 'react-bootstrap';
 
-import {
-	ERROR, INFO, WARNING, SUCCESS,
-} from '../utils/message';
-
 const ALERT_LEVEL_MAP = {
-	[ERROR]: 'danger',
-	[INFO]: 'primary',
-	[WARNING]: 'warning',
-	[SUCCESS]: 'success',
+	error: 'danger',
+	info: 'primary',
+	warning: 'warning',
+	success: 'success',
 };
 
 export default function App(props) {
 	const { children, messages, ...rest } = props;
 	const PageComponent = children;
 
-	const alerts = messages.map((alert, index) => (
-		// eslint-disable-next-line react/no-array-index-key
-		<Alert key={index} variant={ALERT_LEVEL_MAP[alert.type]}>{alert.message}</Alert>
-	));
+	const alerts = Object.entries(messages).map(([type, values]) => (
+		values.map((message, index) => (
+			// eslint-disable-next-line react/no-array-index-key
+			<Alert key={index} variant={ALERT_LEVEL_MAP[type]}>{message}</Alert>
+		))
+	)).flat();
+
 	return (
 		<>
 			<header>
@@ -60,7 +59,3 @@ export default function App(props) {
 		</>
 	);
 }
-
-App.defaultProps = {
-	messages: [],
-};

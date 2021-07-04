@@ -2,7 +2,6 @@ import passport from 'passport';
 import passportLocal from 'passport-local';
 
 import { User } from '../models';
-import { ErrorMessage } from '../utils/message';
 
 passport.use(new passportLocal.Strategy({
 	usernameField: 'email',
@@ -32,26 +31,18 @@ function authenticate(req, res, next) {
 	return new Promise((resolve, reject) => {
 		passport.authenticate('local', (err, user, info) => {
 			if (err) reject(err);
-			if (!user) reject(info.message);
+			if (!user) reject(new Error(info.message));
 			resolve(user);
 		})(req, res, next);
 	});
 }
 
 export async function login(req, res, next) {
-	try {
-		const user = await authenticate(req, res, next);
-		return req.login(user, (err) => {
-			if (err) throw err;
-			res.redirect('/');
-		});
-	} catch (err) {
-		return res.render('login', {
-			messages: [
-				new ErrorMessage(err),
-			],
-		});
-	}
+	const user = await authenticate(req, res, next);
+	return req.login(user, (err) => {
+		if (err) throw err;
+		res.redirect('/');
+	});
 }
 
 export async function logout(req, res) {
