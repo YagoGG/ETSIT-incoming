@@ -57,7 +57,7 @@ export async function login(req, res, next) {
 	});
 }
 
-export async function logout(req, res) {
+export function logout(req, res) {
 	req.logout();
 	res.redirect('/');
 }
