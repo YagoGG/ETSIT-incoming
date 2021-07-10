@@ -1,3 +1,4 @@
+import { isCelebrateError } from 'celebrate';
 import sessionSequelize from 'connect-session-sequelize';
 import express from 'express';
 import 'express-async-errors';
@@ -44,8 +45,20 @@ app.use('/static', express.static(`${__dirname}/static`));
 // Global error handler.
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
-	req.flash('error', err.message);
-	res.redirect('back');
+	if (isCelebrateError(err)) {
+		err.details.forEach((validationError) => {
+			validationError.details.forEach((e) => {
+				req.flash('error', e.message);
+			});
+		});
+	} else {
+		// TODO: Differentiate between controlled and internal errors.
+		// eslint-disable-next-line no-console
+		console.error(err);
+		req.flash('error', err.message);
+	}
+
+	return res.redirect('back');
 });
 
 export default app;
