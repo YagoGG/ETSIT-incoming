@@ -31,11 +31,10 @@ if (env === 'production') {
 	sessionOptions.cookie.secure = true;
 }
 app.use(session(sessionOptions));
+app.use(flash());
 app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.use(flash());
 
 app.use(router);
 
