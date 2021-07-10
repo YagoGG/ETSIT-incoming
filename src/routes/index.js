@@ -3,7 +3,7 @@ import express from 'express';
 import * as authController from '../controllers/auth';
 import { User } from '../models';
 
-import * as check from './check';
+import * as check from './utils/check';
 
 const router = express.Router();
 
