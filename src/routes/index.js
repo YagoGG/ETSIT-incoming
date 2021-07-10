@@ -12,11 +12,11 @@ router.route('/')
 		if (req.user.role === User.ADMIN_ROLE) {
 			res.redirect('/admin');
 		} else {
-			res.redirect('/my-application');
+			res.redirect('/application');
 		}
 	});
 
-router.route('/my-application')
+router.route('/application')
 	.get(check.isLoggedIn, (req, res) => res.render('application_dashboard', { user: req.user }));
 
 router.route('/admin')
