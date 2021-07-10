@@ -31,8 +31,12 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser(async (id, done) => {
-	const user = await User.findByPk(id);
-	done(null, user);
+	try {
+		const user = await User.findByPk(id);
+		done(null, user);
+	} catch (err) {
+		done(err, null);
+	}
 });
 
 function authenticate(req, res, next) {
