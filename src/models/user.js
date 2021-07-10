@@ -42,7 +42,10 @@ User.init({
 		type: DataTypes.STRING,
 		allowNull: false,
 	},
-	name: {
+	firstName: {
+		type: DataTypes.STRING,
+	},
+	lastName: {
 		type: DataTypes.STRING,
 	},
 	role: {
