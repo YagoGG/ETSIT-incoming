@@ -37,8 +37,10 @@ describe('auth controller', () => {
 			.expect((res) => {
 				const { messages } = res.body.props;
 				expect(res.body.view).toEqual('login');
-				expect(messages.error).toHaveLength(1);
-				expect(messages.error[0]).toEqual('Missing credentials');
+				expect(messages.error).toEqual([
+					'"email" is required',
+					'"password" is required',
+				]);
 			});
 
 		await agent
@@ -50,8 +52,10 @@ describe('auth controller', () => {
 			.expect((res) => {
 				const { messages } = res.body.props;
 				expect(res.body.view).toEqual('login');
-				expect(messages.error).toHaveLength(1);
-				expect(messages.error[0]).toEqual('Missing credentials');
+				expect(messages.error).toEqual([
+					'"email" is not allowed to be empty',
+					'"password" is not allowed to be empty',
+				]);
 			});
 
 		await agent
@@ -63,8 +67,9 @@ describe('auth controller', () => {
 			.expect((res) => {
 				const { messages } = res.body.props;
 				expect(res.body.view).toEqual('login');
-				expect(messages.error).toHaveLength(1);
-				expect(messages.error[0]).toEqual('Missing credentials');
+				expect(messages.error).toEqual([
+					'"email" is not allowed to be empty',
+				]);
 			});
 
 		await agent
@@ -76,8 +81,9 @@ describe('auth controller', () => {
 			.expect((res) => {
 				const { messages } = res.body.props;
 				expect(res.body.view).toEqual('login');
-				expect(messages.error).toHaveLength(1);
-				expect(messages.error[0]).toEqual('Missing credentials');
+				expect(messages.error).toEqual([
+					'"password" is not allowed to be empty',
+				]);
 			});
 	});
 
@@ -91,8 +97,9 @@ describe('auth controller', () => {
 			.expect((res) => {
 				const { messages } = res.body.props;
 				expect(res.body.view).toEqual('login');
-				expect(messages.error).toHaveLength(1);
-				expect(messages.error[0]).toEqual('Incorrect email/password combination');
+				expect(messages.error).toEqual([
+					'Incorrect email/password combination',
+				]);
 			});
 	});
 
@@ -106,8 +113,9 @@ describe('auth controller', () => {
 			.expect((res) => {
 				const { messages } = res.body.props;
 				expect(res.body.view).toEqual('login');
-				expect(messages.error).toHaveLength(1);
-				expect(messages.error[0]).toEqual('Incorrect email/password combination');
+				expect(messages.error).toEqual([
+					'Incorrect email/password combination',
+				]);
 			});
 	});
 

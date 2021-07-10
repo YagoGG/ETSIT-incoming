@@ -6,6 +6,7 @@ import * as authController from '../controllers/auth';
 import { User } from '../models';
 
 import * as check from './utils/check';
+import validateInput from './utils/validateInput';
 
 const router = express.Router();
 
@@ -33,6 +34,7 @@ router.route('/admin')
 router.route('/login')
 	.get(authController.renderLogin)
 	.post(
+		validateInput.login,
 		authController.login('regular-local'),
 	);
 
