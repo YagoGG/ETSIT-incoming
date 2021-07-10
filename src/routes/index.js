@@ -24,7 +24,7 @@ router.route('/admin')
 
 router.route('/login')
 	.get((req, res) => res.render('login'))
-	.post(authController.login);
+	.post(authController.login('regular-local'));
 
 router.route('/logout')
 	.get(authController.logout);

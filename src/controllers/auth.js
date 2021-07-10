@@ -3,28 +3,34 @@ import passportLocal from 'passport-local';
 
 import { User } from '../models';
 
-passport.use(new passportLocal.Strategy({
+async function loginVerifier(email, password, done) {
+	try {
+		const user = await User.findOne({ where: { email } });
+		if (!user) {
+			return done(null, false, {
+				message: 'Incorrect email/password combination',
+			});
+		}
+
+		const isPasswordCorrect = await user.verifyPassword(password);
+		if (!isPasswordCorrect) {
+			return done(
+				null, false, {
+					message: 'Incorrect email/password combination',
+				},
+			);
+		}
+
+		return done(null, user);
+	} catch (err) {
+		return done(null, false, { message: err.message });
+	}
+}
+
+passport.use('regular-local', new passportLocal.Strategy({
 	usernameField: 'email',
 	passwordField: 'password',
-}, async (email, password, done) => {
-	const user = await User.findOne({ where: { email } });
-	if (!user) {
-		return done(null, false, {
-			message: 'Incorrect email/password combination',
-		});
-	}
-
-	const isPasswordCorrect = await user.verifyPassword(password);
-	if (!isPasswordCorrect) {
-		return done(
-			null, false, {
-				message: 'Incorrect email/password combination',
-			},
-		);
-	}
-
-	return done(null, user);
-}));
+}, loginVerifier));
 
 passport.serializeUser((user, done) => {
 	done(null, user.id);
@@ -39,9 +45,19 @@ passport.deserializeUser(async (id, done) => {
 	}
 });
 
-function authenticate(req, res, next) {
+/**
+ * Wraps Passport.js's authenticate method in a Promise, so that it can be used
+ * with asynchronous code.
+ * @param {string} strategy - Name of the Passport strategy to use.
+ * @param {any} req
+ * @param {any} res
+ * @param {any} next
+ * @returns A Promise that will resolve upon successful authentication, and
+ * 	reject otherwise.
+ */
+function authenticate(strategy, req, res, next) {
 	return new Promise((resolve, reject) => {
-		passport.authenticate('local', (err, user, info) => {
+		passport.authenticate(strategy, (err, user, info) => {
 			if (err) reject(err);
 			if (!user) reject(new Error(info.message));
 			resolve(user);
@@ -49,12 +65,27 @@ function authenticate(req, res, next) {
 	});
 }
 
-export async function login(req, res, next) {
-	const user = await authenticate(req, res, next);
-	return req.login(user, (err) => {
-		if (err) throw err;
-		res.redirect('/');
-	});
+/**
+ * Middleware that authenticates a request using a previously defined strategy,
+ * and potentially renders a view upon success.
+ * @param {string} strategy - Authentication strategy to use (temporary-local or
+ * 	regular-local).
+ * @param {string} [renderView] - View that should be rendered upon a successful
+ * 	authentication. If not specified, it will redirect to "/".
+ * @returns Middleware function with (req, res, next) signature.
+ */
+export function login(strategy, renderView) {
+	return async (req, res, next) => {
+		const user = await authenticate(strategy, req, res, next);
+		return req.login(user, (err) => {
+			if (err) throw err;
+			if (renderView) {
+				res.render(renderView);
+			} else {
+				res.redirect('/');
+			}
+		});
+	};
 }
 
 /**
