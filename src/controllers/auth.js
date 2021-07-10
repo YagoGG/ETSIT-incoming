@@ -98,3 +98,7 @@ export function logout(req, res) {
 	req.flash('success', 'You have successfully logged out. See you soon!');
 	res.redirect('/');
 }
+
+export function renderLogin(req, res) {
+	return res.render('login');
+}
