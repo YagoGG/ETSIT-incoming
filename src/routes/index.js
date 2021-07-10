@@ -1,5 +1,7 @@
 import express from 'express';
 
+import * as adminController from '../controllers/admin';
+import * as applicationController from '../controllers/application';
 import * as authController from '../controllers/auth';
 import { User } from '../models';
 
@@ -17,14 +19,22 @@ router.route('/')
 	});
 
 router.route('/application')
-	.get(check.isLoggedIn, (req, res) => res.render('application_dashboard', { user: req.user }));
+	.get(
+		check.isLoggedIn,
+		applicationController.renderDashboard,
+	);
 
 router.route('/admin')
-	.get(check.isAdmin, (req, res) => res.render('admin_dashboard', { user: req.user }));
+	.get(
+		check.isAdmin,
+		adminController.renderDashboard,
+	);
 
 router.route('/login')
-	.get((req, res) => res.render('login'))
-	.post(authController.login('regular-local'));
+	.get(authController.renderLogin)
+	.post(
+		authController.login('regular-local'),
+	);
 
 router.route('/logout')
 	.get(authController.logout);
