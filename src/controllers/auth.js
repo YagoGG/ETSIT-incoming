@@ -57,6 +57,11 @@ export async function login(req, res, next) {
 	});
 }
 
+/**
+ * Destroy the session associated to a request, logging the user out.
+ * @param {any} req
+ * @param {any} res
+ */
 export function logout(req, res) {
 	req.logout();
 	res.redirect('/');
