@@ -95,5 +95,6 @@ export function login(strategy, renderView) {
  */
 export function logout(req, res) {
 	req.logout();
+	req.flash('success', 'You have successfully logged out. See you soon!');
 	res.redirect('/');
 }
