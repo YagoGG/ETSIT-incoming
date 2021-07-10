@@ -1,4 +1,4 @@
-import { User } from '../models';
+import { User } from '../../models';
 
 export function isLoggedIn(req, res, next) {
 	if (req.user) {
