@@ -6,12 +6,14 @@ export default function Index(props) {
 
 	return (
 		<>
-			<Row>
-				<Col className="d-flex justify-content-end">
+			<Row className="justify-content-between">
+				<Col>
+					<h1>Your application</h1>
+				</Col>
+				<Col md="auto">
 					<Button variant="outline-primary" href="/logout">Log out</Button>
 				</Col>
 			</Row>
-			<h1>Your application</h1>
 			<div>Hello, {user.firstName}!</div>
 		</>
 	);

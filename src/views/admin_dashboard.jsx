@@ -9,8 +9,11 @@ export default function Index(props) {
 
 	return (
 		<>
-			<Row>
-				<Col className="d-flex justify-content-end">
+			<Row className="justify-content-between">
+				<Col>
+					<h1>Administration dashboard</h1>
+				</Col>
+				<Col md="auto">
 					<Button
 						variant="primary"
 						className="mx-2"
@@ -21,7 +24,6 @@ export default function Index(props) {
 					<Button variant="outline-primary" href="/logout">Log out</Button>
 				</Col>
 			</Row>
-			<h1>Administration dashboard</h1>
 			<div>Hello, {user.firstName}!</div>
 			<Modal show={showNominationModal} onHide={() => setNominationModal(false)} centered>
 				<Modal.Header closeButton>
