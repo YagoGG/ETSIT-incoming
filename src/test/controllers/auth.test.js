@@ -92,7 +92,7 @@ describe('auth controller', () => {
 				const { messages } = res.body.props;
 				expect(res.body.view).toEqual('login');
 				expect(messages.error).toHaveLength(1);
-				expect(messages.error[0]).toEqual('Incorrect email');
+				expect(messages.error[0]).toEqual('Incorrect email/password combination');
 			});
 	});
 
@@ -107,7 +107,7 @@ describe('auth controller', () => {
 				const { messages } = res.body.props;
 				expect(res.body.view).toEqual('login');
 				expect(messages.error).toHaveLength(1);
-				expect(messages.error[0]).toEqual('Incorrect password');
+				expect(messages.error[0]).toEqual('Incorrect email/password combination');
 			});
 	});
 

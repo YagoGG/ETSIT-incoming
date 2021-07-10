@@ -8,12 +8,20 @@ passport.use(new passportLocal.Strategy({
 	passwordField: 'password',
 }, async (email, password, done) => {
 	const user = await User.findOne({ where: { email } });
-
-	if (!user) return done(null, false, { message: 'Incorrect email' });
+	if (!user) {
+		return done(null, false, {
+			message: 'Incorrect email/password combination',
+		});
+	}
 
 	const isPasswordCorrect = await user.verifyPassword(password);
-
-	if (!isPasswordCorrect) return done(null, false, { message: 'Incorrect password' });
+	if (!isPasswordCorrect) {
+		return done(
+			null, false, {
+				message: 'Incorrect email/password combination',
+			},
+		);
+	}
 
 	return done(null, user);
 }));
