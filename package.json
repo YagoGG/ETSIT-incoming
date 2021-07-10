@@ -28,6 +28,7 @@
     "@react-ssr/express": "^0.24.0",
     "bcrypt": "^5.0.1",
     "bootstrap": "4.6.0",
+    "celebrate": "^15.0.0",
     "connect-session-sequelize": "^7.1.1",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
