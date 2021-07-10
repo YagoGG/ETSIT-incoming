@@ -22,7 +22,7 @@ export default function Index(props) {
 				</Col>
 			</Row>
 			<h1>Administration dashboard</h1>
-			<div>Hello, {user.name}!</div>
+			<div>Hello, {user.firstName}!</div>
 			<Modal show={showNominationModal} onHide={() => setNominationModal(false)} centered>
 				<Modal.Header closeButton>
 					<Modal.Title>Nominate students</Modal.Title>

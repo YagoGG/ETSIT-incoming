@@ -12,7 +12,7 @@ export default function Index(props) {
 				</Col>
 			</Row>
 			<h1>Your application</h1>
-			<div>Hello, {user.name}!</div>
+			<div>Hello, {user.firstName}!</div>
 		</>
 	);
 }
