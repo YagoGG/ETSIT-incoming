@@ -3708,7 +3708,7 @@ debug@^3.1.1, debug@^3.2.6, debug@^3.2.7:
   dependencies:
     ms "^2.1.1"
 
-debug@^4.3.1:
+debug@^4.3.1, debug@^4.3.2:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.2.tgz#f0a49c18ac8779e31d4a0c6029dfb76873c7428b"
   integrity sha512-mOp8wKcvj7XxC78zLgw/ZA+6TSgkoE2C/ienthhRD298T7UNwAg9diBpLRxC0mOezLl4B0xV7M0cCO6P/O0Xhw==
@@ -7315,7 +7315,15 @@ node-releases@^1.1.70:
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.71.tgz#cb1334b179896b1c89ecfdd4b725fb7bbdfc7dbb"
   integrity sha512-zR6HoT6LrLCRBwukmrVbHv0EpEQjksO6GmFcZQQuCAy139BEsoVKPYnf3jongYW83fAa1torLGYwxxky/p28sg==
 
-nodemailer@^6.6.3:
+nodemailer-mock@^1.5.10:
+  version "1.5.10"
+  resolved "https://registry.yarnpkg.com/nodemailer-mock/-/nodemailer-mock-1.5.10.tgz#bafa7737e3a5203b294186ad209635abe05f8069"
+  integrity sha512-m8MAtcWa/s+de9Fo9pjhjt3mFA1FcxkmB0sknyz0dy9Y7fTmfNXycC2IDMRNmYFrJnd17KRGDJaKzWOhhp9R5g==
+  dependencies:
+    debug "^4.3.2"
+    nodemailer "^6.x"
+
+nodemailer@^6.6.3, nodemailer@^6.x:
   version "6.6.3"
   resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.6.3.tgz#31fb53dd4d8ae16fc088a65cb9ffa8d928a69b48"
   integrity sha512-faZFufgTMrphYoDjvyVpbpJcYzwyFnbAMmQtj1lVBYAUSm3SOy2fIdd9+Mr4UxPosBa0JRw9bJoIwQn+nswiew==
