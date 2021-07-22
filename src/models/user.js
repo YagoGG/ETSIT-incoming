@@ -54,6 +54,11 @@ User.init({
 		defaultValue: User.STUDENT_ROLE,
 		allowNull: false,
 	},
+	temporaryPassword: {
+		type: DataTypes.BOOLEAN,
+		defaultValue: false,
+		allowNull: false,
+	},
 }, { sequelize });
 
 const hashPasswordHook = async (user) => {

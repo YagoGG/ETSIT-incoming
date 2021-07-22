@@ -17,6 +17,7 @@ describe('User model - creation', () => {
 		});
 		await expect(user).toBeInstanceOf(User);
 		await expect(user).toHaveProperty('role', User.STUDENT_ROLE);
+		await expect(user).toHaveProperty('temporaryPassword', false);
 	});
 
 	it('should throw a SequelizeValidationError if the email is not unique', async () => {

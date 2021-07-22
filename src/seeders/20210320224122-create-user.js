@@ -8,6 +8,7 @@ export default {
 			email: 'student@example.com',
 			password: await User.hashPassword('student'),
 			role: User.STUDENT_ROLE,
+			temporaryPassword: false,
 			createdAt: new Date(),
 			updatedAt: new Date(),
 		}, {
@@ -15,6 +16,7 @@ export default {
 			email: 'international@example.com',
 			password: await User.hashPassword('admin'),
 			role: User.ADMIN_ROLE,
+			temporaryPassword: false,
 			createdAt: new Date(),
 			updatedAt: new Date(),
 		}], {});
