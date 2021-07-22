@@ -24,6 +24,20 @@ const schemas = {
 			}).trim().required(),
 		},
 	},
+	registrationFormSubmit: {
+		[Segments.BODY]: {
+			firstName: Joi.string().required(),
+			lastName: Joi.string().required(),
+			email: Joi.string().email().required(),
+			password: Joi.string().min(8).required(),
+		},
+	},
+	registrationFormView: {
+		[Segments.BODY]: {
+			email: Joi.string().email().required(),
+			token: Joi.string().required(),
+		},
+	},
 };
 
 const proxy = new Proxy(schemas, {

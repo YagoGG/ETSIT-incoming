@@ -3,6 +3,7 @@ import express from 'express';
 import * as adminController from '../controllers/admin';
 import * as applicationController from '../controllers/application';
 import * as authController from '../controllers/auth';
+import * as userController from '../controllers/user';
 import { User } from '../models';
 
 import * as check from './utils/check';
@@ -18,6 +19,17 @@ router.route('/')
 			res.redirect('/application');
 		}
 	});
+
+router.route('/register')
+	.get(
+		validateInput.registrationFormView,
+		authController.login('temporary-local', 'registration'),
+	)
+	.post(
+		check.isLoggedIn,
+		validateInput.registrationFormSubmit,
+		userController.register,
+	);
 
 router.route('/application')
 	.get(
