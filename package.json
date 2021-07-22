@@ -46,7 +46,8 @@
     "react-bootstrap": "^1.6.1",
     "react-dom": "^17.0.2",
     "sequelize": "^6.6.2",
-    "sequelize-cli": "^6.2.0"
+    "sequelize-cli": "^6.2.0",
+    "uuid": "^8.3.2"
   },
   "scripts": {
     "dev": "babel-watch --watch src/ --exclude 'src/views/*' --exclude 'src/test/*' src/server.js",
