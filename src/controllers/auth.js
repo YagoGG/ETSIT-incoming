@@ -27,9 +27,19 @@ async function loginVerifier(email, password, done) {
 	}
 }
 
+// We create two different strategies: both of them are local and work equally
+// the same; the only difference lies in them reading the password from
+// different fields in the request.
+// "temporary-local" is to be used with authentication tokens (i.e. one-time
+// logins for registration or password resets), whereas "regular-local" is for
+// the rest of common logins.
 passport.use('regular-local', new passportLocal.Strategy({
 	usernameField: 'email',
 	passwordField: 'password',
+}, loginVerifier));
+passport.use('temporary-local', new passportLocal.Strategy({
+	usernameField: 'email',
+	passwordField: 'token',
 }, loginVerifier));
 
 passport.serializeUser((user, done) => {
