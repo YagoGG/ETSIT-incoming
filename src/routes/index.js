@@ -31,6 +31,13 @@ router.route('/admin')
 		adminController.renderDashboard,
 	);
 
+router.route('/admin/nominate')
+	.post(
+		check.isAdmin,
+		validateInput.nominateUsers,
+		adminController.nominate,
+	);
+
 router.route('/login')
 	.get(authController.renderLogin)
 	.post(

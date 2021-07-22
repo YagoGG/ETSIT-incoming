@@ -16,6 +16,14 @@ const schemas = {
 			password: Joi.string().required(),
 		},
 	},
+	nominateUsers: {
+		[Segments.BODY]: {
+			emails: Joi.string().email({
+				multiple: true,
+				separator: ',\n',
+			}).trim().required(),
+		},
+	},
 };
 
 const proxy = new Proxy(schemas, {

@@ -2,6 +2,7 @@
     "development": {
         "server": {
             "port": 3000,
+            "publicURL": "http://localhost:3000",
             "sessionSecret": "somesecret",
             "passwordSaltRounds": 13
         },
@@ -28,6 +29,7 @@
     "test": {
         "server": {
             "port": 3000,
+            "publicURL": "http://localhost:3000",
             "sessionSecret": "somesecret",
             "passwordSaltRounds": 13
         },
@@ -54,6 +56,7 @@
     "production": {
         "server": {
             "port": 3000,
+            "publicURL": "https://incoming.example.com",
             "sessionSecret": "somesecret",
             "passwordSaltRounds": 13
         },
