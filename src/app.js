@@ -4,6 +4,7 @@ import express from 'express';
 import 'express-async-errors';
 import flash from 'express-flash';
 import session from 'express-session';
+import morgan from 'morgan';
 import passport from 'passport';
 
 import configFile from '../config.json';
@@ -17,6 +18,8 @@ const env = process.env.NODE_ENV || 'development';
 const config = configFile[env];
 
 const app = express();
+
+app.use(morgan(env === 'development' ? 'dev' : 'short'));
 
 // Set up session storage.
 const sessionStore = new SequelizeStore({ db: sequelize });
