@@ -5,6 +5,17 @@
             "sessionSecret": "somesecret",
             "passwordSaltRounds": 13
         },
+        "email": {
+            "adminFrom": "University of Maximegalon's OIA <international@example.com>",
+            "smtp": {
+                "host": "smtp.example.com",
+                "port": 587,
+                "auth": {
+                    "user": "international@example.com",
+                    "pass": "somepassword"
+                }
+            }
+        },
         "database": {
             "host": "localhost",
             "port": 5432,
@@ -20,6 +31,17 @@
             "sessionSecret": "somesecret",
             "passwordSaltRounds": 13
         },
+        "email": {
+            "adminFrom": "University of Maximegalon's OIA <international@example.com>",
+            "smtp": {
+                "host": "smtp.example.com",
+                "port": 587,
+                "auth": {
+                    "user": "international@example.com",
+                    "pass": "somepassword"
+                }
+            }
+        },
         "database": {
             "host": "localhost",
             "port": 5432,
@@ -34,6 +56,17 @@
             "port": 3000,
             "sessionSecret": "somesecret",
             "passwordSaltRounds": 13
+        },
+        "email": {
+            "adminFrom": "University of Maximegalon's OIA <international@example.com>",
+            "smtp": {
+                "host": "smtp.example.com",
+                "port": 587,
+                "auth": {
+                    "user": "international@example.com",
+                    "pass": "somepassword"
+                }
+            }
         },
         "database": {
             "host": "localhost",
