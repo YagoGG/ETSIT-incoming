@@ -128,6 +128,31 @@ describe('auth controller', () => {
 			.expect('Location', '/');
 	});
 
+	it('should reject logins for users not yet registered', async () => {
+		const UNREGISTERED_USER = {
+			email: 'unreg@domain.com',
+			password: '123e4567-e89b-12d3-a456-426614174000',
+			temporaryPassword: true,
+		};
+
+		await User.create(UNREGISTERED_USER);
+
+		await agent
+			.post('/login')
+			.send(`email=${UNREGISTERED_USER.email}`)
+			.send(`password=${UNREGISTERED_USER.password}`)
+			.redirects()
+			.expect(200)
+			.expect((res) => {
+				const { messages } = res.body.props;
+				expect(res.body.view).toEqual('login');
+				expect(messages.error).toEqual([
+					`This user has not registered yet. Please check
+                    your email for the registration link`,
+				]);
+			});
+	});
+
 	afterAll(async () => {
 		await sequelize.close();
 	});

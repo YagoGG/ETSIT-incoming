@@ -21,6 +21,15 @@ async function loginVerifier(email, password, done) {
 			);
 		}
 
+		if (user.temporaryPassword === true) {
+			return done(
+				null, false, {
+					message: `This user has not registered yet. Please check
+						your email for the registration link`,
+				},
+			);
+		}
+
 		return done(null, user);
 	} catch (err) {
 		return done(null, false, { message: err.message });
