@@ -27,7 +27,10 @@ const schemas = {
 };
 
 const proxy = new Proxy(schemas, {
-	get: (object, key) => celebrate(object[key]),
+	get: (object, key) => {
+		if (!(key in object)) throw new Error(`"${key}" is not a valid schema`);
+		return celebrate(object[key]);
+	},
 });
 
 export default proxy;
