@@ -3,7 +3,15 @@ import passportLocal from 'passport-local';
 
 import { User } from '../models';
 
-async function loginVerifier(email, password, done) {
+/**
+ * Verify if a email and password combination is correct.
+ * @param {string} email - Email address for the login request.
+ * @param {string} password - Password for the login request.
+ * @param {function} done - Authentication callback (see Passport.js docs).
+ * @param {boolean} strict - Set to true to reject logins for users with a
+ * 	temporary password.
+ */
+async function loginVerifier(email, password, done, strict) {
 	try {
 		const user = await User.findOne({ where: { email } });
 		if (!user) {
@@ -21,7 +29,7 @@ async function loginVerifier(email, password, done) {
 			);
 		}
 
-		if (user.temporaryPassword === true) {
+		if (strict && user.temporaryPassword === true) {
 			return done(
 				null, false, {
 					message: `This user has not registered yet. Please check
@@ -36,6 +44,10 @@ async function loginVerifier(email, password, done) {
 	}
 }
 
+function strictLoginVerifier(email, password, done) {
+	return loginVerifier(email, password, done, true);
+}
+
 // We create two different strategies: both of them are local and work equally
 // the same; the only difference lies in them reading the password from
 // different fields in the request.
@@ -45,7 +57,7 @@ async function loginVerifier(email, password, done) {
 passport.use('regular-local', new passportLocal.Strategy({
 	usernameField: 'email',
 	passwordField: 'password',
-}, loginVerifier));
+}, strictLoginVerifier));
 passport.use('temporary-local', new passportLocal.Strategy({
 	usernameField: 'email',
 	passwordField: 'token',
