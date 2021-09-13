@@ -7,8 +7,10 @@ import countries from '../../static/countries.json';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 export default function CountryTypeahead(props) {
-	const [selectedCountry, setSelectedCountry] = useState([]);
-	const { name, required, ...typeaheadProps } = props;
+	const {
+		defaultValue, name, required, ...typeaheadProps
+	} = props;
+	const [selectedCountry, setSelectedCountry] = useState(defaultValue);
 
 	return (
 		<>
@@ -18,6 +20,7 @@ export default function CountryTypeahead(props) {
 				labelKey={(country) => `${country.name} (${country.native})`}
 				onChange={(value) => setSelectedCountry(value[0].name)}
 				options={countries}
+				defaultInputValue={defaultValue}
 				inputProps={{ required }}
 				placeholder="Choose a country..."
 				highlightOnlyResult
