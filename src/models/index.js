@@ -1,7 +1,16 @@
+import AcademicPeriod from './academic_period';
 import Application from './application';
 import MobilityProgram from './mobility_program';
 import User from './user';
 
+/*
+Institution.hasMany(Application, {
+	onDelete: 'CASCADE',
+	onUpdate: 'CASCADE',
+	foreignKey: 'institutionId',
+});
+Application.belongsTo(Institution);
+*/
 User.Application = User.hasOne(Application, {
 	onDelete: 'CASCADE',
 	onUpdate: 'CASCADE',
@@ -14,7 +23,13 @@ Application.MobilityProgram = Application.belongsTo(MobilityProgram, {
 	foreignKey: 'mobilityProgramId',
 });
 MobilityProgram.hasMany(Application, { foreignKey: 'mobilityProgramId' });
+Application.AcademicPeriod = Application.belongsTo(AcademicPeriod, {
+	onDelete: 'RESTRICT',
+	onUpdate: 'RESTRICT',
+	foreignKey: 'academicPeriodId',
+});
+AcademicPeriod.hasMany(Application, { foreignKey: 'academicPeriodId' });
 
 export {
-	Application, MobilityProgram, User,
+	AcademicPeriod, Application, MobilityProgram, User,
 };
