@@ -16,6 +16,18 @@ export default class Application extends Model {
 	static get SEX_OTHER() {
 		return 'other';
 	}
+
+	static get FIELD_STUDY_EE() {
+		return 'electrical-engineering';
+	}
+
+	static get FIELD_STUDY_CS() {
+		return 'computer-science';
+	}
+
+	static get FIELD_STUDY_BIO() {
+		return 'biomedical-engineering';
+	}
 }
 
 Application.init({
@@ -50,5 +62,16 @@ Application.init({
 	},
 	phoneNumber: {
 		type: DataTypes.STRING,
+	},
+	fieldOfStudy: {
+		type: DataTypes.ENUM,
+		values: [
+			Application.FIELD_STUDY_CS,
+			Application.FIELD_STUDY_EE,
+			Application.FIELD_STUDY_BIO,
+		],
+	},
+	seeksDoubleDegree: {
+		type: DataTypes.BOOLEAN,
 	},
 }, { sequelize });
