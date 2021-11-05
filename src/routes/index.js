@@ -37,6 +37,18 @@ router.route('/application')
 		applicationController.renderDashboard,
 	);
 
+router.route('/application/form/personal-info')
+	.get(
+		check.isLoggedIn,
+		applicationController.renderFormPersonalInfo,
+	)
+	.post(
+		check.isLoggedIn,
+		validateInput.applicationFormPersonalInfoSubmit,
+		applicationController.saveApplicationData,
+		applicationController.redirectOnCompletedForm,
+	);
+
 router.route('/admin')
 	.get(
 		check.isAdmin,

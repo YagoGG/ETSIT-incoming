@@ -2,6 +2,10 @@ import {
 	celebrator, Joi, Modes, Segments,
 } from 'celebrate';
 
+import countries from '../../static/countries.json';
+
+const countryNames = countries.map((country) => country.name);
+
 const celebrate = celebrator({
 	mode: Modes.FULL,
 }, {
@@ -10,6 +14,19 @@ const celebrate = celebrator({
 });
 
 const schemas = {
+	applicationFormPersonalInfoSubmit: {
+		[Segments.BODY]: {
+			dateOfBirth: Joi.date().required(),
+			placeOfBirth: Joi.string().valid(...countryNames).required(),
+			nationality: Joi.string().valid(...countryNames).required(),
+			sex: Joi.string().valid('male', 'female', 'other').required(),
+			residenceAddress: Joi.string().required(),
+			residenceZipCode: Joi.string().required(),
+			residenceState: Joi.string().required(),
+			residenceCountry: Joi.string().valid(...countryNames).required(),
+			phoneNumber: Joi.string().required(),
+		},
+	},
 	login: {
 		[Segments.BODY]: {
 			email: Joi.string().email().required(),
