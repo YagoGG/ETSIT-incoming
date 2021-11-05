@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import {
-	Button, Col, Form, Modal, Row, Tab, Table, Tabs,
+	Button, Col, Row, Tab, Table, Tabs,
 } from 'react-bootstrap';
+
+import NominationModal from './components/modals/nomination_modal';
 
 export default function Index(props) {
 	const {
@@ -26,24 +28,7 @@ export default function Index(props) {
 					<Button variant="outline-primary" href="/logout">Log out</Button>
 				</Col>
 			</Row>
-			<Modal show={showNominationModal} onHide={() => setNominationModal(false)} centered>
-				<Modal.Header closeButton>
-					<Modal.Title>Nominate students</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-					<Form action="/admin/nominate" method="POST">
-						<Form.Group>
-							<Form.Text className="mb-3">
-								Enter the email addresses of the students to nominate.
-								Each address should be <b>on its own line</b>,
-								or <b>separated by a comma</b>.
-							</Form.Text>
-							<Form.Control required as="textarea" name="emails" aria-label="Emails" />
-						</Form.Group>
-						<Button variant="primary" type="submit">Send nomination</Button>
-					</Form>
-				</Modal.Body>
-			</Modal>
+			<NominationModal show={showNominationModal} onHide={() => setNominationModal(false)} />
 			<p className="mb-5">
 				Hello, {user.firstName}!
 			</p>
