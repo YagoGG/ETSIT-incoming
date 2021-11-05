@@ -1,3 +1,4 @@
+import sequelize from 'sequelize';
 import { v4 as uuidv4 } from 'uuid';
 
 import configFile from '../../config.json';
@@ -7,8 +8,33 @@ import { sendAdminEmail } from '../utils/mail';
 const env = process.env.NODE_ENV || 'development';
 const config = configFile[env];
 
-export function renderDashboard(req, res) {
-	return res.render('admin_dashboard', { user: req.user });
+export async function renderDashboard(req, res) {
+	return res.render('admin_dashboard', {
+		user: req.user,
+		nominated: await User.findAll({
+			where: {
+				role: User.STUDENT_ROLE,
+				firstName: null,
+			},
+		}),
+		registered: await User.findAll({
+			where: {
+				role: User.STUDENT_ROLE,
+				firstName: {
+					[sequelize.Op.not]: null,
+				},
+			},
+			include: {
+				all: true,
+				nested: true,
+			},
+		}),
+		admins: await User.findAll({
+			where: {
+				role: User.ADMIN_ROLE,
+			},
+		}),
+	});
 }
 
 export async function nominate(req, res) {

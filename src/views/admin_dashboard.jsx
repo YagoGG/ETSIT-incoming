@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import {
-	Button, Col, Form, Modal, Row,
+	Button, Col, Form, Modal, Row, Tab, Table, Tabs,
 } from 'react-bootstrap';
 
 export default function Index(props) {
-	const { user } = props;
+	const {
+		user, nominated, registered, admins,
+	} = props;
 	const [showNominationModal, setNominationModal] = useState(false);
 
 	return (
@@ -24,7 +26,6 @@ export default function Index(props) {
 					<Button variant="outline-primary" href="/logout">Log out</Button>
 				</Col>
 			</Row>
-			<div>Hello, {user.firstName}!</div>
 			<Modal show={showNominationModal} onHide={() => setNominationModal(false)} centered>
 				<Modal.Header closeButton>
 					<Modal.Title>Nominate students</Modal.Title>
@@ -43,6 +44,75 @@ export default function Index(props) {
 					</Form>
 				</Modal.Body>
 			</Modal>
+			<p className="mb-5">
+				Hello, {user.firstName}!
+			</p>
+			<Tabs defaultActiveKey="nominated" className="mb-3">
+				<Tab eventKey="nominated" title="Nominated students">
+					<Table hover>
+						<thead>
+							<tr>
+								<th>Email</th>
+							</tr>
+						</thead>
+						<tbody>
+							{nominated.map((nominatedUser) => (
+								<tr key={nominatedUser.id}>
+									<td>{nominatedUser.email}</td>
+								</tr>
+							))}
+						</tbody>
+					</Table>
+				</Tab>
+				<Tab eventKey="registered" title="Registered students">
+					<Table hover>
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>University</th>
+								<th>Period</th>
+							</tr>
+						</thead>
+						<tbody>
+							{registered.map((registeredUser) => (
+								<tr key={registeredUser.id}>
+									<td>
+										{`${registeredUser.lastName}, ${registeredUser.firstName}`}
+									</td>
+									<td>
+										{registeredUser.Application.homeSchool
+											|| <em className="text-muted fst-italic">unknown</em>}
+									</td>
+									<td>
+										{registeredUser.Application.AcademicPeriod.name
+											|| <em className="text-muted fst-italic">unknown</em>}
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</Table>
+				</Tab>
+				<Tab eventKey="admins" title="Administrators">
+					<Table hover>
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Email</th>
+							</tr>
+						</thead>
+						<tbody>
+							{admins.map((adminUser) => (
+								<tr key={adminUser.id}>
+									<td>
+										{`${adminUser.lastName}, ${adminUser.firstName}`}
+									</td>
+									<td>{adminUser.email}</td>
+								</tr>
+							))}
+						</tbody>
+					</Table>
+				</Tab>
+			</Tabs>
 		</>
 	);
 }
