@@ -1,3 +1,5 @@
+import { AcademicPeriod, MobilityProgram } from '../models';
+
 /**
  * Wrap an instance of the Application model in a Proxy so that all keys with a
  * null value return undefined instead.
@@ -26,6 +28,23 @@ export function renderFormPersonalInfo(req, res) {
 	return res.render(
 		'form_personal_info',
 		{ application: getApplicationProxy(req.user.Application) },
+	);
+}
+
+export async function renderFormMobilityProgram(req, res) {
+	return res.render(
+		'form_mobility_program',
+		{
+			application: getApplicationProxy(req.user.Application),
+			academicPeriods: await AcademicPeriod.findAll({
+				attributes: ['id', 'name'],
+				where: { active: true },
+			}),
+			mobilityPrograms: await MobilityProgram.findAll({
+				attributes: ['id', 'name'],
+				where: { active: true },
+			}),
+		},
 	);
 }
 

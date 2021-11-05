@@ -52,6 +52,18 @@ router.route('/application/form/personal-info')
 		check.isLoggedIn,
 		validateInput.applicationFormPersonalInfoSubmit,
 		applicationController.saveApplicationData,
+		(req, res) => res.redirect('/application/form/program'),
+	);
+
+router.route('/application/form/program')
+	.get(
+		check.isLoggedIn,
+		applicationController.renderFormMobilityProgram,
+	)
+	.post(
+		check.isLoggedIn,
+		validateInput.applicationFormMobilityProgramSubmit,
+		applicationController.saveApplicationData,
 		applicationController.redirectOnCompletedForm,
 	);
 

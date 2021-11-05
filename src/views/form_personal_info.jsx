@@ -160,7 +160,7 @@ export default function FormPersonalInfo(props) {
 						<Button variant="secondary" href="/application">Back to the dashboard</Button>
 					</Col>
 					<Col md="auto">
-						<Button variant="primary" type="submit">Save &amp; finish</Button>
+						<Button variant="primary" type="submit">Save &amp; continue</Button>
 					</Col>
 				</Row>
 			</Form>

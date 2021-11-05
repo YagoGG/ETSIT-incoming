@@ -3,10 +3,12 @@ import { Pagination } from 'react-bootstrap';
 
 export const Pages = Object.freeze({
 	PERSONAL_INFO: 'personal_info',
+	MOBILITY_PROGRAM: 'mobility_program',
 });
 
 const items = {
 	[Pages.PERSONAL_INFO]: ['/application/form/personal-info', 'Personal details'],
+	[Pages.MOBILITY_PROGRAM]: ['/application/form/program', 'Mobility program'],
 };
 
 export default function PaginationBar(props) {

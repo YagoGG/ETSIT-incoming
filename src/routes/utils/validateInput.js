@@ -2,9 +2,34 @@ import {
 	celebrator, Joi, Modes, Segments,
 } from 'celebrate';
 
+import { AcademicPeriod, MobilityProgram } from '../../models';
 import countries from '../../static/countries.json';
 
 const countryNames = countries.map((country) => country.name);
+
+async function validateAcademicPeriod(value) {
+	const academicPeriodIds = (await AcademicPeriod.findAll({
+		attributes: ['id'],
+	})).map((period) => period.id);
+
+	if (!academicPeriodIds.includes(value)) {
+		throw new Joi.ValidationError('Unknown academic period.', [{
+			message: `There is no academic period with ID ${value}`,
+		}]);
+	}
+}
+
+async function validateMobilityProgram(value) {
+	const mobilityProgramIds = (await MobilityProgram.findAll({
+		attributes: ['id'],
+	})).map((program) => program.id);
+
+	if (!mobilityProgramIds.includes(value)) {
+		throw new Joi.ValidationError('Unknown mobility program.', [{
+			message: `There is no mobility program with ID ${value}`,
+		}]);
+	}
+}
 
 const celebrate = celebrator({
 	mode: Modes.FULL,
@@ -25,6 +50,23 @@ const schemas = {
 			residenceState: Joi.string().required(),
 			residenceCountry: Joi.string().valid(...countryNames).required(),
 			phoneNumber: Joi.string().required(),
+		},
+	},
+	applicationFormMobilityProgramSubmit: {
+		[Segments.BODY]: {
+			academicPeriodId: Joi.number().integer().required()
+				.external(validateAcademicPeriod),
+			mobilityProgramId: Joi.number().integer().required()
+				.external(validateMobilityProgram),
+			fieldOfStudy: Joi.string().valid(
+				'electrical-engineering',
+				'computer-science',
+				'biomedical-engineering',
+			).required(),
+			// When a checkbox is checked, its value is "on" (string). The
+			// checkbox's key is not present in the request's body otherwise
+			// (so we make it false by default).
+			seeksDoubleDegree: Joi.boolean().truthy('on').default('false'),
 		},
 	},
 	login: {
