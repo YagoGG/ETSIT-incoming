@@ -51,7 +51,14 @@ router.route('/admin/nominate')
 	);
 
 router.route('/login')
-	.get(authController.renderLogin)
+	.get((req, res, next) => {
+		// Go to the home page if the user is already logged in.
+		if (req.user) {
+			res.redirect('/');
+		} else {
+			next();
+		}
+	}, authController.renderLogin)
 	.post(
 		validateInput.login,
 		authController.login('regular-local'),
