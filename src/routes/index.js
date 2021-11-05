@@ -37,6 +37,12 @@ router.route('/application')
 		applicationController.renderDashboard,
 	);
 
+router.route('/application/form')
+	.get(
+		check.isLoggedIn,
+		(req, res) => res.redirect('/application/form/personal-info'),
+	);
+
 router.route('/application/form/personal-info')
 	.get(
 		check.isLoggedIn,

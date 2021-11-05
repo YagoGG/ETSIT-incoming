@@ -25,3 +25,14 @@ header span.subtitle {
 h1 {
 	margin-bottom: 2rem;
 }
+
+.subcontainer {
+	border-radius: 10px;
+	background-color: #f7f7ff;
+	padding: 2rem;
+}
+
+#dashboard-accordion .card-header {
+	padding: 1.2rem;
+	font-weight: bold;
+}
