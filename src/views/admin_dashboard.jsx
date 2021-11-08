@@ -4,12 +4,14 @@ import {
 } from 'react-bootstrap';
 
 import NominationModal from './components/modals/nomination_modal';
+import SettingsModal from './components/modals/settings_modal';
 
 export default function Index(props) {
 	const {
 		user, nominated, registered, admins,
 	} = props;
 	const [showNominationModal, setNominationModal] = useState(false);
+	const [showSettingsModal, setSettingsModal] = useState(false);
 
 	return (
 		<>
@@ -25,10 +27,18 @@ export default function Index(props) {
 					>
 						Nominate students
 					</Button>
+					<Button
+						variant="primary"
+						className="me-2"
+						onClick={() => setSettingsModal(true)}
+					>
+						Settings
+					</Button>
 					<Button variant="outline-primary" href="/logout">Log out</Button>
 				</Col>
 			</Row>
 			<NominationModal show={showNominationModal} onHide={() => setNominationModal(false)} />
+			<SettingsModal show={showSettingsModal} onHide={() => setSettingsModal(false)} />
 			<p className="mb-5">
 				Hello, {user.firstName}!
 			</p>
