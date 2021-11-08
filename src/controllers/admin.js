@@ -2,7 +2,7 @@ import sequelize from 'sequelize';
 import { v4 as uuidv4 } from 'uuid';
 
 import configFile from '../../config.json';
-import { User } from '../models';
+import { Institution, User } from '../models';
 import { sendAdminEmail } from '../utils/mail';
 
 const env = process.env.NODE_ENV || 'development';
@@ -71,5 +71,13 @@ export async function nominate(req, res) {
 
 	await Promise.all(queue);
 	req.flash('success', 'Nominations sent.');
+	return res.redirect('/admin');
+}
+
+export async function updateInstitutions(req, res) {
+	await Institution.bulkCreate(req.body.institutions, {
+		updateOnDuplicate: ['name', 'active'],
+	});
+	req.flash('success', 'Partner institution list updated.');
 	return res.redirect('/admin');
 }

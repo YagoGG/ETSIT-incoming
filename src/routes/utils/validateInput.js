@@ -1,6 +1,7 @@
 import {
 	celebrator, Joi, Modes, Segments,
 } from 'celebrate';
+import parse from 'csv-parse';
 
 import { AcademicPeriod, MobilityProgram } from '../../models';
 import countries from '../../static/countries.json';
@@ -29,6 +30,29 @@ async function validateMobilityProgram(value) {
 			message: `There is no mobility program with ID ${value}`,
 		}]);
 	}
+}
+
+async function parseInstitutionsCSV(value) {
+	const parser = parse(value, {
+		trim: true,
+	});
+
+	const entries = [];
+	// eslint-disable-next-line no-restricted-syntax
+	for await (const record of parser) {
+		const [code, name] = record;
+
+		if (record.length !== 2
+			|| code === undefined
+			|| code.length === 0
+			|| name === undefined
+			|| name.length === 0
+		) throw new Error(`Bad input in row ${entries.length}`);
+
+		entries.push({ code, name, active: true });
+	}
+
+	return entries;
 }
 
 const celebrate = celebrator({
@@ -95,6 +119,12 @@ const schemas = {
 		[Segments.BODY]: {
 			email: Joi.string().email().required(),
 			token: Joi.string().required(),
+		},
+	},
+	updateInstitutions: {
+		[Segments.BODY]: {
+			institutions: Joi.string().trim().required()
+				.external(parseInstitutionsCSV),
 		},
 	},
 };

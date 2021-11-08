@@ -80,6 +80,13 @@ router.route('/admin/nominate')
 		adminController.nominate,
 	);
 
+router.route('/admin/institutions')
+	.post(
+		check.isAdmin,
+		validateInput.updateInstitutions,
+		adminController.updateInstitutions,
+	);
+
 router.route('/login')
 	.get((req, res, next) => {
 		// Go to the home page if the user is already logged in.
