@@ -8,14 +8,14 @@ export default function Login() {
 		<>
 			<h1 className="mb-4">Log in</h1>
 			<Row className="align-items-center">
-				<Col sm className="border-right ml-1 pr-5">
+				<Col sm className="border-end ms-1 pe-5">
 					<Form action="/login" method="post">
-						<Form.Group controlId="email">
+						<Form.Group controlId="email" className="mb-3">
 							<Form.Label>Email address</Form.Label>
 							<Form.Control type="email" name="email" placeholder="you@uni.edu" />
 						</Form.Group>
 
-						<Form.Group controlId="password">
+						<Form.Group controlId="password" className="mb-3">
 							<Form.Label>Password</Form.Label>
 							<Form.Control type="password" name="password" placeholder="Your password" />
 						</Form.Group>

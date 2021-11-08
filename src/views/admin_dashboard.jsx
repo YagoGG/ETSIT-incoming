@@ -20,7 +20,7 @@ export default function Index(props) {
 				<Col md="auto">
 					<Button
 						variant="primary"
-						className="mx-2"
+						className="me-2"
 						onClick={() => setNominationModal(true)}
 					>
 						Nominate students
