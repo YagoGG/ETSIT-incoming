@@ -10,17 +10,24 @@ export default function CountryTypeahead(props) {
 	const {
 		defaultValue, name, required, ...typeaheadProps
 	} = props;
-	const [selectedCountry, setSelectedCountry] = useState(defaultValue);
+	const [selectedCountries, setSelectedCountries] = useState(
+		countries.filter((country) => country.name === defaultValue),
+	);
 
 	return (
 		<>
-			<Form.Control type="hidden" value={selectedCountry} name={name} />
+			<Form.Control
+				type="hidden"
+				value={selectedCountries[0] ? selectedCountries[0].id : ''}
+				name={name}
+				required={required}
+			/>
 			<Typeahead
 				id={`${name}-country-typeahead`}
 				labelKey={(country) => `${country.name} (${country.native})`}
-				onChange={(value) => setSelectedCountry(value[0].name)}
+				onChange={setSelectedCountries}
 				options={countries}
-				defaultInputValue={defaultValue}
+				selected={selectedCountries}
 				inputProps={{ required }}
 				placeholder="Choose a country..."
 				highlightOnlyResult
