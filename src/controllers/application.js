@@ -1,4 +1,4 @@
-import { AcademicPeriod, MobilityProgram } from '../models';
+import { AcademicPeriod, Institution, MobilityProgram } from '../models';
 
 /**
  * Wrap an instance of the Application model in a Proxy so that all keys with a
@@ -42,6 +42,19 @@ export async function renderFormMobilityProgram(req, res) {
 			}),
 			mobilityPrograms: await MobilityProgram.findAll({
 				attributes: ['id', 'name'],
+				where: { active: true },
+			}),
+		},
+	);
+}
+
+export async function renderFormHomeInstitution(req, res) {
+	return res.render(
+		'form_home_institution',
+		{
+			application: getApplicationProxy(req.user.Application),
+			institutions: await Institution.findAll({
+				attributes: ['id', 'code', 'name'],
 				where: { active: true },
 			}),
 		},

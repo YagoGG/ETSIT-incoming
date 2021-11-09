@@ -3,7 +3,7 @@ import {
 } from 'celebrate';
 import parse from 'csv-parse';
 
-import { AcademicPeriod, MobilityProgram } from '../../models';
+import { AcademicPeriod, Institution, MobilityProgram } from '../../models';
 import countries from '../../static/countries.json';
 
 const countryNames = countries.map((country) => country.name);
@@ -28,6 +28,18 @@ async function validateMobilityProgram(value) {
 	if (!mobilityProgramIds.includes(value)) {
 		throw new Joi.ValidationError('Unknown mobility program.', [{
 			message: `There is no mobility program with ID ${value}`,
+		}]);
+	}
+}
+
+async function validateInstitutionId(value) {
+	const institutionIds = (await Institution.findAll({
+		attributes: ['id'],
+	})).map((institution) => institution.id);
+
+	if (!institutionIds.includes(value)) {
+		throw new Joi.ValidationError('Unknown institution.', [{
+			message: `There is no institution with ID ${value}`,
 		}]);
 	}
 }
@@ -91,6 +103,18 @@ const schemas = {
 			// checkbox's key is not present in the request's body otherwise
 			// (so we make it false by default).
 			seeksDoubleDegree: Joi.boolean().truthy('on').default('false'),
+		},
+	},
+	applicationFormHomeInstitutionSubmit: {
+		[Segments.BODY]: {
+			homeInstitutionId: Joi.number().required()
+				.external(validateInstitutionId),
+			homeInstitutionSchool: Joi.string().required(),
+			homeInstitutionAddress: Joi.string().required(),
+			homeInstitutionCoordinatorName: Joi.string().required(),
+			homeInstitutionContactName: Joi.string().required(),
+			homeInstitutionContactEmail: Joi.string().email().required(),
+			homeInstitutionContactPhone: Joi.string().required(),
 		},
 	},
 	login: {

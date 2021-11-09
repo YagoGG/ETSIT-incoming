@@ -64,6 +64,18 @@ router.route('/application/form/program')
 		check.isLoggedIn,
 		validateInput.applicationFormMobilityProgramSubmit,
 		applicationController.saveApplicationData,
+		(req, res) => res.redirect('/application/form/home-institution'),
+	);
+
+router.route('/application/form/home-institution')
+	.get(
+		check.isLoggedIn,
+		applicationController.renderFormHomeInstitution,
+	)
+	.post(
+		check.isLoggedIn,
+		validateInput.applicationFormHomeInstitutionSubmit,
+		applicationController.saveApplicationData,
 		applicationController.redirectOnCompletedForm,
 	);
 

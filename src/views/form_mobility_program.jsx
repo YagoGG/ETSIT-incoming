@@ -106,7 +106,7 @@ export default function FormMobilityProgram(props) {
 						<Button variant="secondary" href="/application/form/personal-info">Back</Button>
 					</Col>
 					<Col md="auto">
-						<Button variant="primary" type="submit">Save &amp; finish</Button>
+						<Button variant="primary" type="submit">Save &amp; continue</Button>
 					</Col>
 				</Row>
 			</Form>
