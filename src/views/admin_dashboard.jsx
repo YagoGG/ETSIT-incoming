@@ -75,12 +75,14 @@ export default function Index(props) {
 										{`${registeredUser.lastName}, ${registeredUser.firstName}`}
 									</td>
 									<td>
-										{registeredUser.Application.homeSchool
+										{(registeredUser.Application.HomeInstitution
+											&& registeredUser.Application.HomeInstitution.name)
 											|| <em className="text-muted fst-italic">unknown</em>}
 									</td>
 									<td>
-										{registeredUser.Application.AcademicPeriod.name
-											|| <em className="text-muted fst-italic">unknown</em>}
+										{(registeredUser.Application.AcademicPeriod
+											&& registeredUser.Application.AcademicPeriod.name)
+												|| <em className="text-muted fst-italic">unknown</em>}
 									</td>
 								</tr>
 							))}
