@@ -74,4 +74,22 @@ Application.init({
 	seeksDoubleDegree: {
 		type: DataTypes.BOOLEAN,
 	},
+	homeInstitutionSchool: {
+		type: DataTypes.STRING,
+	},
+	homeInstitutionAddress: {
+		type: DataTypes.STRING,
+	},
+	homeInstitutionCoordinatorName: {
+		type: DataTypes.STRING,
+	},
+	homeInstitutionContactName: {
+		type: DataTypes.STRING,
+	},
+	homeInstitutionContactEmail: {
+		type: DataTypes.STRING,
+	},
+	homeInstitutionContactPhone: {
+		type: DataTypes.STRING,
+	},
 }, { sequelize });
