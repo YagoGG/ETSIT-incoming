@@ -5,8 +5,10 @@ import parse from 'csv-parse';
 
 import { AcademicPeriod, Institution, MobilityProgram } from '../../models';
 import countries from '../../static/countries.json';
+import languages from '../../static/languages.json';
 
 const countryNames = countries.map((country) => country.name);
+const languageNames = languages.map((language) => language.name);
 
 async function validateAcademicPeriod(value) {
 	const academicPeriodIds = (await AcademicPeriod.findAll({
@@ -130,6 +132,42 @@ const schemas = {
 			purposeOfStayOther: Joi.boolean().truthy('on')
 				.default('false'),
 			purposeOfStayOtherDetails: Joi.string().empty('').default(null),
+		},
+	},
+	applicationFormLanguagesSubmit: {
+		[Segments.BODY]: {
+			motherTongue: Joi.string().valid(...languageNames).required(),
+			instructionLang: Joi.string().valid(...languageNames).required(),
+			otherLang1Name: Joi.string().valid(...languageNames).empty('').default(null),
+			otherLang1CurrentlyStudying: Joi.boolean().truthy('on')
+				.default(false),
+			otherLang1CanFollow: Joi.boolean().truthy('on').default(false),
+			otherLang1CanFollowExtraPrep: Joi.boolean().truthy('on')
+				.default(false),
+			otherLang2Name: Joi.string().empty('').default(null),
+			otherLang2CurrentlyStudying: Joi.boolean().truthy('on')
+				.default(false),
+			otherLang2CanFollow: Joi.boolean().truthy('on').default(false),
+			otherLang2CanFollowExtraPrep: Joi.boolean().truthy('on')
+				.default(false),
+			otherLang3Name: Joi.string().empty('').default(null),
+			otherLang3CurrentlyStudying: Joi.boolean().truthy('on')
+				.default(false),
+			otherLang3CanFollow: Joi.boolean().truthy('on').default(false),
+			otherLang3CanFollowExtraPrep: Joi.boolean().truthy('on')
+				.default(false),
+			otherLang4Name: Joi.string().empty('').default(null),
+			otherLang4CurrentlyStudying: Joi.boolean().truthy('on')
+				.default(false),
+			otherLang4CanFollow: Joi.boolean().truthy('on').default(false),
+			otherLang4CanFollowExtraPrep: Joi.boolean().truthy('on')
+				.default(false),
+			otherLang5Name: Joi.string().empty('').default(null),
+			otherLang5CurrentlyStudying: Joi.boolean().truthy('on')
+				.default(false),
+			otherLang5CanFollow: Joi.boolean().truthy('on').default(false),
+			otherLang5CanFollowExtraPrep: Joi.boolean().truthy('on')
+				.default(false),
 		},
 	},
 	login: {

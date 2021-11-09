@@ -68,6 +68,13 @@ export function renderFormPurposeOfStay(req, res) {
 	);
 }
 
+export function renderFormLanguages(req, res) {
+	return res.render(
+		'form_languages',
+		{ application: getApplicationProxy(req.user.Application) },
+	);
+}
+
 export function saveApplicationData(req, res, next) {
 	Object.keys(req.body).forEach((key) => {
 		req.user.Application[key] = req.body[key];

@@ -87,6 +87,17 @@ router.route('/application/form/purpose-of-stay')
 		check.isLoggedIn,
 		validateInput.applicationFormPurposeOfStaySubmit,
 		applicationController.saveApplicationData,
+	);
+
+router.route('/application/form/languages')
+	.get(
+		check.isLoggedIn,
+		applicationController.renderFormLanguages,
+	)
+	.post(
+		check.isLoggedIn,
+		validateInput.applicationFormLanguagesSubmit,
+		applicationController.saveApplicationData,
 		applicationController.redirectOnCompletedForm,
 	);
 
