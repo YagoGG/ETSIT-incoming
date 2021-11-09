@@ -92,4 +92,22 @@ Application.init({
 	homeInstitutionContactPhone: {
 		type: DataTypes.STRING,
 	},
+	purposeOfStayBachelorCourses: {
+		type: DataTypes.BOOLEAN,
+	},
+	purposeOfStayMasterCourses: {
+		type: DataTypes.BOOLEAN,
+	},
+	purposeOfStayThesis: {
+		type: DataTypes.BOOLEAN,
+	},
+	purposeOfStayResearchProject: {
+		type: DataTypes.BOOLEAN,
+	},
+	purposeOfStayOther: {
+		type: DataTypes.BOOLEAN,
+	},
+	purposeOfStayOtherDetails: {
+		type: DataTypes.STRING,
+	},
 }, { sequelize });
