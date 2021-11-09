@@ -5,12 +5,14 @@ export const Pages = Object.freeze({
 	PERSONAL_INFO: 'personal_info',
 	MOBILITY_PROGRAM: 'mobility_program',
 	HOME_INSTITUTION: 'home_institution',
+	PURPOSE_OF_STAY: 'purpose_of_stay',
 });
 
 const items = {
 	[Pages.PERSONAL_INFO]: ['/application/form/personal-info', 'Personal details'],
 	[Pages.MOBILITY_PROGRAM]: ['/application/form/program', 'Mobility program'],
 	[Pages.HOME_INSTITUTION]: ['/application/form/home-institution', 'Home institution'],
+	[Pages.PURPOSE_OF_STAY]: ['/application/form/purpose-of-stay', 'Purpose of stay'],
 };
 
 export default function PaginationBar(props) {

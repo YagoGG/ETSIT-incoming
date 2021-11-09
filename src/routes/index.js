@@ -76,6 +76,17 @@ router.route('/application/form/home-institution')
 		check.isLoggedIn,
 		validateInput.applicationFormHomeInstitutionSubmit,
 		applicationController.saveApplicationData,
+	);
+
+router.route('/application/form/purpose-of-stay')
+	.get(
+		check.isLoggedIn,
+		applicationController.renderFormPurposeOfStay,
+	)
+	.post(
+		check.isLoggedIn,
+		validateInput.applicationFormPurposeOfStaySubmit,
+		applicationController.saveApplicationData,
 		applicationController.redirectOnCompletedForm,
 	);
 

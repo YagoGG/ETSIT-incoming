@@ -61,6 +61,13 @@ export async function renderFormHomeInstitution(req, res) {
 	);
 }
 
+export function renderFormPurposeOfStay(req, res) {
+	return res.render(
+		'form_purpose_of_stay',
+		{ application: getApplicationProxy(req.user.Application) },
+	);
+}
+
 export function saveApplicationData(req, res, next) {
 	Object.keys(req.body).forEach((key) => {
 		req.user.Application[key] = req.body[key];

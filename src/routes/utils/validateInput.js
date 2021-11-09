@@ -117,6 +117,21 @@ const schemas = {
 			homeInstitutionContactPhone: Joi.string().required(),
 		},
 	},
+	applicationFormPurposeOfStaySubmit: {
+		[Segments.BODY]: {
+			purposeOfStayBachelorCourses: Joi.boolean().truthy('on')
+				.default('false'),
+			purposeOfStayMasterCourses: Joi.boolean().truthy('on')
+				.default('false'),
+			purposeOfStayThesis: Joi.boolean().truthy('on')
+				.default('false'),
+			purposeOfStayResearchProject: Joi.boolean().truthy('on')
+				.default('false'),
+			purposeOfStayOther: Joi.boolean().truthy('on')
+				.default('false'),
+			purposeOfStayOtherDetails: Joi.string().empty('').default(null),
+		},
+	},
 	login: {
 		[Segments.BODY]: {
 			email: Joi.string().email().required(),
