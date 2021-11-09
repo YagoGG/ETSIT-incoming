@@ -110,4 +110,70 @@ Application.init({
 	purposeOfStayOtherDetails: {
 		type: DataTypes.STRING,
 	},
+	motherTongue: {
+		type: DataTypes.STRING,
+	},
+	instructionLang: {
+		type: DataTypes.STRING,
+	},
+	otherLang1Name: {
+		type: DataTypes.STRING,
+	},
+	otherLang1CurrentlyStudying: {
+		type: DataTypes.BOOLEAN,
+	},
+	otherLang1CanFollow: {
+		type: DataTypes.BOOLEAN,
+	},
+	otherLang1CanFollowExtraPrep: {
+		type: DataTypes.BOOLEAN,
+	},
+	otherLang2Name: {
+		type: DataTypes.STRING,
+	},
+	otherLang2CurrentlyStudying: {
+		type: DataTypes.BOOLEAN,
+	},
+	otherLang2CanFollow: {
+		type: DataTypes.BOOLEAN,
+	},
+	otherLang2CanFollowExtraPrep: {
+		type: DataTypes.BOOLEAN,
+	},
+	otherLang3Name: {
+		type: DataTypes.STRING,
+	},
+	otherLang3CurrentlyStudying: {
+		type: DataTypes.BOOLEAN,
+	},
+	otherLang3CanFollow: {
+		type: DataTypes.BOOLEAN,
+	},
+	otherLang3CanFollowExtraPrep: {
+		type: DataTypes.BOOLEAN,
+	},
+	otherLang4Name: {
+		type: DataTypes.STRING,
+	},
+	otherLang4CurrentlyStudying: {
+		type: DataTypes.BOOLEAN,
+	},
+	otherLang4CanFollow: {
+		type: DataTypes.BOOLEAN,
+	},
+	otherLang4CanFollowExtraPrep: {
+		type: DataTypes.BOOLEAN,
+	},
+	otherLang5Name: {
+		type: DataTypes.STRING,
+	},
+	otherLang5CurrentlyStudying: {
+		type: DataTypes.BOOLEAN,
+	},
+	otherLang5CanFollow: {
+		type: DataTypes.BOOLEAN,
+	},
+	otherLang5CanFollowExtraPrep: {
+		type: DataTypes.BOOLEAN,
+	},
 }, { sequelize });
