@@ -104,7 +104,7 @@ const schemas = {
 			// When a checkbox is checked, its value is "on" (string). The
 			// checkbox's key is not present in the request's body otherwise
 			// (so we make it false by default).
-			seeksDoubleDegree: Joi.boolean().truthy('on').default('false'),
+			seeksDoubleDegree: Joi.boolean().truthy('on').default(false),
 		},
 	},
 	applicationFormHomeInstitutionSubmit: {
@@ -122,15 +122,15 @@ const schemas = {
 	applicationFormPurposeOfStaySubmit: {
 		[Segments.BODY]: {
 			purposeOfStayBachelorCourses: Joi.boolean().truthy('on')
-				.default('false'),
+				.default(false),
 			purposeOfStayMasterCourses: Joi.boolean().truthy('on')
-				.default('false'),
+				.default(false),
 			purposeOfStayThesis: Joi.boolean().truthy('on')
-				.default('false'),
+				.default(false),
 			purposeOfStayResearchProject: Joi.boolean().truthy('on')
-				.default('false'),
+				.default(false),
 			purposeOfStayOther: Joi.boolean().truthy('on')
-				.default('false'),
+				.default(false),
 			purposeOfStayOtherDetails: Joi.string().empty('').default(null),
 		},
 	},
