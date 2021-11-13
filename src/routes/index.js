@@ -98,6 +98,17 @@ router.route('/application/form/languages')
 		check.isLoggedIn,
 		validateInput.applicationFormLanguagesSubmit,
 		applicationController.saveApplicationData,
+	);
+
+router.route('/application/form/work-experience')
+	.get(
+		check.isLoggedIn,
+		applicationController.renderFormWorkExperience,
+	)
+	.post(
+		check.isLoggedIn,
+		validateInput.applicationFormWorkExperienceSubmit,
+		applicationController.saveApplicationData,
 		applicationController.redirectOnCompletedForm,
 	);
 

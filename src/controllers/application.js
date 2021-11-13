@@ -75,6 +75,13 @@ export function renderFormLanguages(req, res) {
 	);
 }
 
+export function renderFormWorkExperience(req, res) {
+	return res.render(
+		'form_work_experience',
+		{ application: getApplicationProxy(req.user.Application) },
+	);
+}
+
 export function saveApplicationData(req, res, next) {
 	Object.keys(req.body).forEach((key) => {
 		req.user.Application[key] = req.body[key];

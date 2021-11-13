@@ -170,6 +170,42 @@ const schemas = {
 				.default(false),
 		},
 	},
+	applicationFormWorkExperienceSubmit: {
+		[Segments.BODY]: {
+			hasWorkExperience: Joi.boolean().truthy('on')
+				.default(false),
+			workExperienceRole: Joi.alternatives().conditional(
+				'hasWorkExperience', {
+					is: true,
+					then: Joi.string().required(),
+				},
+			),
+			workExperienceEmployer: Joi.alternatives().conditional(
+				'hasWorkExperience', {
+					is: true,
+					then: Joi.string().required(),
+				},
+			),
+			workExperienceLocation: Joi.alternatives().conditional(
+				'hasWorkExperience', {
+					is: true,
+					then: Joi.string().required(),
+				},
+			),
+			workExperienceStartDate: Joi.alternatives().conditional(
+				'hasWorkExperience', {
+					is: true,
+					then: Joi.date().required(),
+				},
+			),
+			workExperienceEndDate: Joi.alternatives().conditional(
+				'hasWorkExperience', {
+					is: true,
+					then: Joi.date().required(),
+				},
+			),
+		},
+	},
 	login: {
 		[Segments.BODY]: {
 			email: Joi.string().email().required(),
