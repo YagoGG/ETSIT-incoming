@@ -4,6 +4,7 @@
   "main": "src/server.js",
   "author": "Yago González",
   "devDependencies": {
+    "@babel/cli": "^7.16.0",
     "@babel/core": "^7.13.14",
     "@babel/node": "^7.13.13",
     "@babel/plugin-transform-runtime": "^7.13.10",
@@ -53,6 +54,7 @@
     "uuid": "^8.3.2"
   },
   "scripts": {
+    "build": "babel src/ --out-dir=dist/ --copy-files",
     "dev": "babel-watch --watch src/ --exclude 'src/views/**/*' --exclude 'src/test/**/*' src/server.js",
     "lint": "eslint --ext .js,.jsx .",
     "test": "NODE_ENV=test jest --config=.jestrc.json --runInBand",
