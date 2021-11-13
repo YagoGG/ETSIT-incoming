@@ -55,6 +55,11 @@
   },
   "scripts": {
     "build": "babel src/ --out-dir=dist/ --copy-files",
+    "db:create": "sequelize db:create --env=\"$NODE_ENV\"",
+    "db:drop": "sequelize db:drop --env=\"$NODE_ENV\"",
+    "db:migrate": "sequelize db:migrate --env=\"$NODE_ENV\"",
+    "db:reset": "yarn run db:drop && yarn run db:create && yarn run db:migrate && yarn run db:seed",
+    "db:seed": "sequelize db:seed:all --env=\"$NODE_ENV\"",
     "dev": "babel-watch --watch=src/ --exclude='src/views/**/*' --exclude='src/test/**/*' src/server.js",
     "lint": "eslint --ext='.js,.jsx' --ignore-pattern='dist/**/*' .",
     "test": "NODE_ENV=test jest --config=.jestrc.json --runInBand",
