@@ -56,7 +56,7 @@
   "scripts": {
     "build": "babel src/ --out-dir=dist/ --copy-files",
     "dev": "babel-watch --watch=src/ --exclude='src/views/**/*' --exclude='src/test/**/*' src/server.js",
-    "lint": "eslint --ext='.js,.jsx' .",
+    "lint": "eslint --ext='.js,.jsx' --ignore-pattern='dist/**/*' .",
     "test": "NODE_ENV=test jest --config=.jestrc.json --runInBand",
     "test-with-coverage": "yarn test --collect-coverage",
     "sequelize": "sequelize --config=sequelize_cli.config.js --migrations-path=src/migrations --seeders-path=src/seeders"
