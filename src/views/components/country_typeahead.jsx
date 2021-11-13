@@ -18,7 +18,7 @@ export default function CountryTypeahead(props) {
 		<>
 			<Form.Control
 				type="hidden"
-				value={selectedCountries[0] ? selectedCountries[0].id : ''}
+				value={selectedCountries[0] ? selectedCountries[0].name : ''}
 				name={name}
 				required={required}
 			/>
