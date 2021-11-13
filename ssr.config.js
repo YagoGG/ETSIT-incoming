@@ -1,4 +1,4 @@
 module.exports = {
-	distDir: 'dist',
+	distDir: 'dist_ssr',
 	viewsDir: 'src/views',
 };
