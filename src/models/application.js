@@ -176,4 +176,22 @@ Application.init({
 	otherLang5CanFollowExtraPrep: {
 		type: DataTypes.BOOLEAN,
 	},
+	hasWorkExperience: {
+		type: DataTypes.BOOLEAN,
+	},
+	workExperienceRole: {
+		type: DataTypes.STRING,
+	},
+	workExperienceEmployer: {
+		type: DataTypes.STRING,
+	},
+	workExperienceLocation: {
+		type: DataTypes.STRING,
+	},
+	workExperienceStartDate: {
+		type: DataTypes.DATEONLY,
+	},
+	workExperienceEndDate: {
+		type: DataTypes.DATEONLY,
+	},
 }, { sequelize });
