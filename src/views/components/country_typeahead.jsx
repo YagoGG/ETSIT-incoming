@@ -33,7 +33,7 @@ export default function CountryTypeahead(props) {
 				highlightOnlyResult
 				renderMenuItemChildren={(country, { text }) => (
 					<>
-						<span className="mr-2">{country.emoji}</span>
+						<span className="me-2">{country.emoji}</span>
 						<Highlighter search={text}>{country.name}</Highlighter>
 						<div><small>{country.native}</small></div>
 					</>
