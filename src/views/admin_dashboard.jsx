@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-	Button, Col, Row, Tab, Table, Tabs,
+	Button, Stack, Tab, Table, Tabs,
 } from 'react-bootstrap';
 
 import NominationModal from './components/modals/nomination_modal';
@@ -15,28 +15,18 @@ export default function Index(props) {
 
 	return (
 		<>
-			<Row className="justify-content-between">
-				<Col>
-					<h1>Administration dashboard</h1>
-				</Col>
-				<Col md="auto">
-					<Button
-						variant="primary"
-						className="me-2"
-						onClick={() => setNominationModal(true)}
-					>
-						Nominate students
-					</Button>
-					<Button
-						variant="primary"
-						className="me-2"
-						onClick={() => setSettingsModal(true)}
-					>
-						Settings
-					</Button>
-					<Button variant="outline-primary" href="/logout">Log out</Button>
-				</Col>
-			</Row>
+			<Stack direction="horizontal" className="mb-4" gap={2}>
+				<h1 className="me-auto mb-0">Administration dashboard</h1>
+				<Button variant="primary" onClick={() => setNominationModal(true)}>
+					Nominate students
+				</Button>
+				<Button variant="primary" onClick={() => setSettingsModal(true)}>
+					Settings
+				</Button>
+				<Button variant="outline-primary" href="/logout">
+					Log out
+				</Button>
+			</Stack>
 			<NominationModal show={showNominationModal} onHide={() => setNominationModal(false)} />
 			<SettingsModal show={showSettingsModal} onHide={() => setSettingsModal(false)} />
 			<p className="mb-5">

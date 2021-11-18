@@ -1,21 +1,15 @@
 import React from 'react';
-import {
-	Accordion, Button, Col, Row,
-} from 'react-bootstrap';
+import { Accordion, Button, Stack } from 'react-bootstrap';
 
 export default function Index(props) {
 	const { user } = props;
 
 	return (
 		<>
-			<Row className="justify-content-between">
-				<Col>
-					<h1>Your application</h1>
-				</Col>
-				<Col md="auto">
-					<Button variant="outline-primary" href="/logout">Log out</Button>
-				</Col>
-			</Row>
+			<Stack direction="horizontal" className="mb-4" gap={2}>
+				<h1 className="me-auto mb-0">Your application</h1>
+				<Button variant="outline-primary" href="/logout">Log out</Button>
+			</Stack>
 			<p>Hello, {user.firstName}! This is the status of your application.</p>
 			<Accordion id="dashboard-accordion" defaultActiveKey="0">
 				<Accordion.Item eventKey="0">
