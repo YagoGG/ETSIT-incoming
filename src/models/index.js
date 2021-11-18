@@ -2,6 +2,7 @@ import AcademicPeriod from './academic_period';
 import Application from './application';
 import Institution from './institution';
 import MobilityProgram from './mobility_program';
+import Subject from './subject';
 import User from './user';
 
 User.Application = User.hasOne(Application, {
@@ -37,5 +38,5 @@ Institution.hasMany(Application, {
 });
 
 export {
-	AcademicPeriod, Application, Institution, MobilityProgram, User,
+	AcademicPeriod, Application, Institution, MobilityProgram, Subject, User,
 };
