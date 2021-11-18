@@ -189,7 +189,7 @@ const schemas = {
 			workExperienceLocation: Joi.alternatives().conditional(
 				'hasWorkExperience', {
 					is: true,
-					then: Joi.string().required(),
+					then: Joi.string().valid(...countryNames).required(),
 				},
 			),
 			workExperienceStartDate: Joi.alternatives().conditional(
