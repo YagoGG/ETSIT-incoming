@@ -54,7 +54,7 @@
     "uuid": "^8.3.2"
   },
   "scripts": {
-    "build": "babel src/ --out-dir=dist/ --copy-files",
+    "build": "babel --delete-dir-on-start --out-dir=dist/ --copy-files src/",
     "db:create": "sequelize db:create --env=\"$NODE_ENV\"",
     "db:drop": "sequelize db:drop --env=\"$NODE_ENV\"",
     "db:migrate": "sequelize db:migrate --env=\"$NODE_ENV\"",
