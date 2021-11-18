@@ -132,6 +132,23 @@ router.route('/admin/institutions')
 		adminController.updateInstitutions,
 	);
 
+router.route('/admin/subjects')
+	.get(
+		check.isAdmin,
+		adminController.renderSubjects,
+	)
+	.post(
+		check.isAdmin,
+		validateInput.updateSubjectStatuses,
+		adminController.updateSubjectStatuses,
+	);
+
+router.route('/admin/subjects/update')
+	.post(
+		check.isAdmin,
+		adminController.updateSubjects,
+	);
+
 router.route('/login')
 	.get((req, res, next) => {
 		// Go to the home page if the user is already logged in.

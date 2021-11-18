@@ -1,8 +1,9 @@
-import sequelize from 'sequelize';
+import sequelize, { Op } from 'sequelize';
 import { v4 as uuidv4 } from 'uuid';
 
 import configFile from '../../config.json';
-import { Institution, User } from '../models';
+import { getStudyPlans, getSubjects } from '../api_upm';
+import { Institution, User, Subject } from '../models';
 import { sendAdminEmail } from '../utils/mail';
 
 const env = process.env.NODE_ENV || 'development';
@@ -80,4 +81,68 @@ export async function updateInstitutions(req, res) {
 	});
 	req.flash('success', 'Partner institution list updated.');
 	return res.redirect('/admin');
+}
+
+export async function renderSubjects(req, res) {
+	const studyPlans = (await getStudyPlans('09')).map((rawStudyPlan) => ({
+		code: rawStudyPlan.codigo,
+		nameNative: rawStudyPlan.nombre,
+	}));
+	return res.render(
+		'admin_subjects',
+		{
+			subjects: await Subject.findAll(),
+			studyPlans,
+		},
+	);
+}
+
+export async function updateSubjects(req, res) {
+	const studyPlans = ['09BM', '09ID', '09TT', '09AQ', '09AR', '09AT', '09AU', '09AW', '09AX', '09AZ', '09BA'];
+	const rawSubjects = await getSubjects(studyPlans);
+	const dbData = rawSubjects
+		.map((rawSubject) => ({
+			code: rawSubject.codigo,
+			nameNative: rawSubject.nombre,
+			nameEnglish: rawSubject.nombre_ingles,
+			ects: parseFloat(rawSubject.credects.replace(',', '.')),
+			active: rawSubject.ofertada === 'S',
+		})).flat();
+	await Subject.bulkCreate(dbData, {
+		updateOnDuplicate: ['nameNative', 'nameEnglish', 'ects', 'active'],
+	});
+
+	req.flash('success', 'The subject list has been updated.');
+	return res.redirect('/admin/subjects');
+}
+
+export async function updateSubjectStatuses(req, res) {
+	/* Because of how HTML checkboxes work, req.body only contains keys for those
+	 * checkboxes that have been marked (i.e. those subjects that should be
+	 * enabled).
+	 *
+	 * This means that the rest of the subjects that are not in that list should
+	 * be disabled. */
+	const activeCodes = Object.keys(req.body).map((codeStr) => parseInt(codeStr, 10));
+	await Subject.update({
+		active: true,
+	}, {
+		where: {
+			code: {
+				[Op.in]: activeCodes,
+			},
+		},
+	});
+	await Subject.update({
+		active: false,
+	}, {
+		where: {
+			code: {
+				[Op.notIn]: activeCodes,
+			},
+		},
+	});
+
+	req.flash('success', 'The changes were saved.');
+	return res.redirect('/admin/subjects');
 }

@@ -240,6 +240,12 @@ const schemas = {
 				.external(parseInstitutionsCSV),
 		},
 	},
+	updateSubjectStatuses: {
+		[Segments.BODY]: Joi.object().pattern(
+			/\d+/,
+			Joi.boolean().truthy('on'),
+		),
+	},
 };
 
 const proxy = new Proxy(schemas, {
