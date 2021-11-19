@@ -194,4 +194,22 @@ Application.init({
 	workExperienceEndDate: {
 		type: DataTypes.DATEONLY,
 	},
+	currentStudiesName: {
+		type: DataTypes.STRING,
+	},
+	currentStudiesYear: {
+		type: DataTypes.INTEGER,
+	},
+	currentStudiesSpecialisation: {
+		type: DataTypes.STRING,
+	},
+	hasStudiedAbroad: {
+		type: DataTypes.BOOLEAN,
+	},
+	abroadStudiesInstitution: {
+		type: DataTypes.STRING,
+	},
+	abroadStudiesLocation: {
+		type: DataTypes.STRING,
+	},
 }, { sequelize });
