@@ -214,10 +214,14 @@ const schemas = {
 	},
 	nominateUsers: {
 		[Segments.BODY]: {
-			emails: Joi.string().email({
-				multiple: true,
-				separator: ',\n',
-			}).trim().required(),
+			emails: Joi.string()
+				// Textarea's newlines are always CRLF.
+				.replace(/\r\n/, '\n')
+				.email({
+					multiple: true,
+					separator: ',\n',
+				}).trim()
+				.required(),
 		},
 	},
 	registrationFormSubmit: {
