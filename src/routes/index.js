@@ -112,6 +112,18 @@ router.route('/application/form/work-experience')
 		check.isLoggedIn,
 		validateInput.applicationFormWorkExperienceSubmit,
 		applicationController.saveApplicationData,
+		(req, res) => res.redirect('/application/form/studies'),
+	);
+
+router.route('/application/form/studies')
+	.get(
+		check.isLoggedIn,
+		applicationController.renderFormStudies,
+	)
+	.post(
+		check.isLoggedIn,
+		validateInput.applicationFormStudiesSubmit,
+		applicationController.saveApplicationData,
 		applicationController.redirectOnCompletedForm,
 	);
 

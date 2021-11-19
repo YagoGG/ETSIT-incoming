@@ -82,6 +82,13 @@ export function renderFormWorkExperience(req, res) {
 	);
 }
 
+export function renderFormStudies(req, res) {
+	return res.render(
+		'form_studies',
+		{ application: getApplicationProxy(req.user.Application) },
+	);
+}
+
 export function saveApplicationData(req, res, next) {
 	Object.keys(req.body).forEach((key) => {
 		req.user.Application[key] = req.body[key];

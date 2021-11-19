@@ -206,6 +206,17 @@ const schemas = {
 			),
 		},
 	},
+	applicationFormStudiesSubmit: {
+		[Segments.BODY]: {
+			currentStudiesName: Joi.string().required(),
+			currentStudiesYear: Joi.number().required(),
+			currentStudiesSpecialisation: Joi.string().required(),
+			hasStudiedAbroad: Joi.boolean().truthy('on')
+				.default(false),
+			abroadStudiesInstitution: Joi.string(),
+			abroadStudiesLocation: Joi.string().valid(...countryNames),
+		},
+	},
 	login: {
 		[Segments.BODY]: {
 			email: Joi.string().email().required(),
