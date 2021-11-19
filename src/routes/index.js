@@ -76,6 +76,7 @@ router.route('/application/form/home-institution')
 		check.isLoggedIn,
 		validateInput.applicationFormHomeInstitutionSubmit,
 		applicationController.saveApplicationData,
+		(req, res) => res.redirect('/application/form/purpose-of-stay'),
 	);
 
 router.route('/application/form/purpose-of-stay')
@@ -87,6 +88,7 @@ router.route('/application/form/purpose-of-stay')
 		check.isLoggedIn,
 		validateInput.applicationFormPurposeOfStaySubmit,
 		applicationController.saveApplicationData,
+		(req, res) => res.redirect('/application/form/languages'),
 	);
 
 router.route('/application/form/languages')
@@ -98,6 +100,7 @@ router.route('/application/form/languages')
 		check.isLoggedIn,
 		validateInput.applicationFormLanguagesSubmit,
 		applicationController.saveApplicationData,
+		(req, res) => res.redirect('/application/form/work-experience'),
 	);
 
 router.route('/application/form/work-experience')
