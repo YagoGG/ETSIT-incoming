@@ -23,11 +23,11 @@ export default function InstitutionsModal(props) {
 								Each institution should be <b>on its own line</b>,
 								composed of the <b>institution&apos;s code</b> followed
 								by a <b>comma</b> and the <b>institution&apos;s name</b>,
-								e.g.:
+								both quoted. Example:
 							</p>
 							<pre className="ms-3">
-								CH LAUSANN 06,École Polytechnique Fédérale de Lausanne<br />
-								I TORINO 02,Politecnico di Torino
+								&quot;CH LAUSANN 06&quot;,&quot;École Polytechnique Fédérale de Lausanne&quot;<br />
+								&quot;I TORINO 02&quot;,&quot;Politecnico di Torino&quot;
 							</pre>
 						</Form.Text>
 						<Form.Control
