@@ -3,7 +3,9 @@ import {
 } from 'celebrate';
 import parse from 'csv-parse';
 
-import { AcademicPeriod, Institution, MobilityProgram } from '../../models';
+import {
+	AcademicPeriod, Institution, MobilityProgram, Subject,
+} from '../../models';
 import countries from '../../static/countries.json';
 import languages from '../../static/languages.json';
 
@@ -42,6 +44,18 @@ async function validateInstitutionId(value) {
 	if (!institutionIds.includes(value)) {
 		throw new Joi.ValidationError('Unknown institution.', [{
 			message: `There is no institution with ID ${value}`,
+		}]);
+	}
+}
+
+async function validateSubjectCode(value) {
+	const subjectCodes = (await Subject.findAll({
+		attributes: ['code'],
+	})).map((subject) => subject.code);
+
+	if (!subjectCodes.includes(value)) {
+		throw new Joi.ValidationError('Unknown subject.', [{
+			message: `There is no subject with code ${value}`,
 		}]);
 	}
 }
@@ -215,6 +229,13 @@ const schemas = {
 				.default(false),
 			abroadStudiesInstitution: Joi.string(),
 			abroadStudiesLocation: Joi.string().valid(...countryNames),
+		},
+	},
+	applicationLearningAgreementSubmit: {
+		[Segments.BODY]: {
+			subjects: Joi.array().items(
+				Joi.number().integer().external(validateSubjectCode),
+			),
 		},
 	},
 	login: {

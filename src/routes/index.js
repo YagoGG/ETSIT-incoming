@@ -127,6 +127,13 @@ router.route('/application/form/studies')
 		applicationController.redirectOnCompletedForm,
 	);
 
+router.route('/application/learning-agreement')
+	.post(
+		check.isLoggedIn,
+		validateInput.applicationLearningAgreementSubmit,
+		applicationController.saveLearningAgreement,
+	);
+
 router.route('/admin')
 	.get(
 		check.isAdmin,

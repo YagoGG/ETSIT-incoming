@@ -101,3 +101,17 @@ export function redirectOnCompletedForm(req, res) {
 	req.flash('success', 'Your application form was saved successfully.');
 	return res.redirect('/application');
 }
+
+export async function saveLearningAgreement(req, res) {
+	const subjects = await Subject.findAll({
+		where: {
+			code: {
+				[Op.in]: req.body.subjects,
+			},
+		},
+	});
+	await req.user.Application.addLearningAgreementSubjects(subjects);
+
+	req.flash('success', 'Your learning agreement was saved successfully.');
+	return res.redirect('/application');
+}
