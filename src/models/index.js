@@ -37,6 +37,18 @@ Institution.hasMany(Application, {
 	as: 'HomeInstitution',
 });
 
+Application.belongsToMany(Subject, {
+	as: 'learningAgreementSubjects',
+	through: 'ApplicationSubjects',
+	sourceKey: 'id',
+	targetKey: 'code',
+});
+Subject.belongsToMany(Application, {
+	through: 'ApplicationSubjects',
+	sourceKey: 'code',
+	targetKey: 'id',
+});
+
 export {
 	AcademicPeriod, Application, Institution, MobilityProgram, Subject, User,
 };
