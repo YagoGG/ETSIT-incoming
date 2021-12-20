@@ -89,11 +89,11 @@ export function renderFormStudies(req, res) {
 	);
 }
 
-export function saveApplicationData(req, res, next) {
+export async function saveApplicationData(req, res, next) {
 	Object.keys(req.body).forEach((key) => {
 		req.user.Application[key] = req.body[key];
 	});
-	req.user.Application.save();
+	await req.user.Application.save();
 	next();
 }
 
