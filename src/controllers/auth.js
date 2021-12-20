@@ -69,7 +69,12 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
 	try {
-		const user = await User.findByPk(id, { include: { all: true } });
+		const user = await User.findByPk(id, {
+			include: {
+				all: true,
+				nested: true,
+			},
+		});
 		done(null, user);
 	} catch (err) {
 		done(err, null);
