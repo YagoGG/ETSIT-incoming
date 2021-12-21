@@ -12,6 +12,15 @@ import languages from '../../static/languages.json';
 const countryNames = countries.map((country) => country.name);
 const languageNames = languages.map((language) => language.name);
 
+/* Here we define multiple custom validation functions. Even though they just
+ * check a value against a list of possible values, this cannot be done with
+ * Joi.any().valid(values) because the set of values can change while the app is
+ * running.
+ *
+ * Without these validation functions, the set of acceptable values would be
+ * fixed when the app starts, and could not be modified without a full restart.
+ */
+
 async function validateAcademicPeriod(value) {
 	const academicPeriodIds = (await AcademicPeriod.findAll({
 		attributes: ['id'],
