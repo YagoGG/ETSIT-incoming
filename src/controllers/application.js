@@ -1,4 +1,8 @@
-import { AcademicPeriod, Institution, MobilityProgram } from '../models';
+import { Op } from 'sequelize';
+
+import {
+	AcademicPeriod, Institution, MobilityProgram, Subject,
+} from '../models';
 
 /**
  * Wrap an instance of the Application model in a Proxy so that all keys with a
@@ -20,8 +24,15 @@ function getApplicationProxy(application) {
 	});
 }
 
-export function renderDashboard(req, res) {
-	return res.render('application_dashboard', { user: req.user });
+export async function renderDashboard(req, res) {
+	return res.render('application_dashboard', {
+		user: req.user,
+		enabledSubjects: await Subject.findAll({
+			attributes: ['code', 'nameEnglish', 'ects'],
+			where: { active: true },
+		}),
+		laSubjects: req.user.Application.learningAgreementSubjects,
+	});
 }
 
 export function renderFormPersonalInfo(req, res) {
